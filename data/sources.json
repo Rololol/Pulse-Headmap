@@ -1,8 +1,74 @@
 [
-  {"id":"bundestag-hib","publisher":"Deutscher Bundestag","type":"rss","url":"https://www.bundestag.de/static/appdata/includes/rss/hib.rss","scope":"hib","enabled":true},
-  {"id":"bundestag-drucksachen","publisher":"Deutscher Bundestag","type":"rss","url":"https://www.bundestag.de/static/appdata/includes/rss/drucksachen.rss","scope":"drucksachen","enabled":true},
-  {"id":"bundesrechnungshof","publisher":"Bundesrechnungshof","type":"html","url":"https://bundesrechnungshof.de/veroeffentlichungen/berichtssuche","scope":"berichte","enabled":true},
-  {"id":"bverfg","publisher":"Bundesverfassungsgericht","type":"html","url":"https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/","scope":"pressemitteilungen","enabled":true},
-  {"id":"bverwg","publisher":"Bundesverwaltungsgericht","type":"html","url":"https://www.bverwg.de/aktuelles","scope":"pressemitteilungen","enabled":true},
-  {"id":"bgh","publisher":"Bundesgerichtshof","type":"html","url":"https://www.bundesgerichtshof.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html?documentType_=pressrelease%20imgobject%20prdocument&sortOrder=dateOfIssue_dt%20desc","scope":"pressemitteilungen","enabled":true}
+  {
+    "id": "bundestag-hib",
+    "publisher": "Deutscher Bundestag",
+    "type": "rss",
+    "url": "https://www.bundestag.de/static/appdata/includes/rss/hib.rss",
+    "scope": "hib",
+    "enabled": true
+  },
+  {
+    "id": "bundestag-drucksachen",
+    "publisher": "Deutscher Bundestag",
+    "type": "rss",
+    "url": "https://www.bundestag.de/static/appdata/includes/rss/drucksachen.rss",
+    "scope": "drucksachen",
+    "enabled": true
+  },
+  {
+    "id": "bundestag-presse",
+    "publisher": "Deutscher Bundestag",
+    "type": "rss",
+    "url": "https://www.bundestag.de/static/appdata/includes/rss/presse.rss",
+    "scope": "presse",
+    "enabled": true
+  },
+  {
+    "id": "bundesrechnungshof",
+    "publisher": "Bundesrechnungshof",
+    "type": "html",
+    "url": "https://bundesrechnungshof.de/veroeffentlichungen/berichtssuche",
+    "scope": "berichte",
+    "enabled": true
+  },
+  {
+    "id": "bverfg",
+    "publisher": "Bundesverfassungsgericht",
+    "type": "html",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/",
+    "scope": "pressemitteilungen",
+    "enabled": true
+  },
+  {
+    "id": "bverwg",
+    "publisher": "Bundesverwaltungsgericht",
+    "type": "html",
+    "url": "https://www.bverwg.de/aktuelles",
+    "scope": "pressemitteilungen",
+    "enabled": true
+  },
+  {
+    "id": "bgh",
+    "publisher": "Bundesgerichtshof",
+    "type": "html",
+    "url": "https://www.bundesgerichtshof.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html?documentType_=pressrelease%20imgobject%20prdocument&sortOrder=dateOfIssue_dt%20desc",
+    "scope": "pressemitteilungen",
+    "enabled": true
+  },
+  {
+    "id": "destatis-finanz",
+    "publisher": "Statistisches Bundesamt",
+    "type": "html",
+    "url": "https://www.destatis.de/DE/Themen/Staat/Oeffentliche-Finanzen/Ausgaben-Einnahmen/_inhalt.html",
+    "scope": "finanzen",
+    "enabled": true
+  },
+  {
+    "id": "destatis-schulden",
+    "publisher": "Statistisches Bundesamt",
+    "type": "html",
+    "url": "https://www.destatis.de/DE/Themen/Staat/Oeffentliche-Finanzen/Schulden-Finanzvermoegen/_inhalt.html",
+    "scope": "schulden",
+    "enabled": true
+  }
 ]
