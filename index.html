@@ -24,6 +24,8 @@ details.section{padding:0;overflow:hidden}details.section summary{list-style:non
 footer{padding:25px 0 50px;color:var(--muted);font-size:8px;line-height:1.5}
 @media(max-width:900px){.moneygrid{grid-template-columns:repeat(3,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}.list{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.filters .input{grid-column:1/-1}.personGrid,.conductGrid,.sourceGrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.wrap{padding:0 12px}.navlinks{flex:1;min-width:0}.hero{padding:27px 0 14px;display:block}.hero h1{font-size:42px}.lead{font-size:13px}.datebox{margin-top:13px}.finance{padding:15px;border-radius:19px}.financeHead{display:block}.finance h2{font-size:19px}.moneygrid{grid-template-columns:repeat(2,1fr)}.money b{font-size:20px}.costper strong{font-size:14px}.kpis{gap:6px}.kpi{padding:11px}.kpi b{font-size:20px}.section{padding:12px;border-radius:17px}.head{align-items:flex-start;display:block}.head .hint{display:block;margin-top:4px}.filters{grid-template-columns:1fr}.filters .input{grid-column:auto}.input,.select{min-height:43px;font-size:11px}.tab{min-height:38px}.list,.personGrid,.conductGrid,.sourceGrid{grid-template-columns:1fr}.item{padding:13px}details.section summary{padding:14px 13px;font-size:17px}.detailbody{padding:13px}.simplegrid{grid-template-columns:1fr}.navlinks a{padding:10px 8px}}
+
+.partyExplorer{margin:18px 0 12px}.partyGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.partyCard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;transition:.18s;min-width:0}.partyCard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.partyCard.active{border-color:var(--blue);box-shadow:0 0 0 3px #007aff18}.partyLogo{height:42px;display:flex;align-items:center;margin-bottom:10px}.partyLogo img{max-height:38px;max-width:120px;object-fit:contain}.partyName{font-weight:850;font-size:14px}.partyCount{font-size:28px;font-weight:900;letter-spacing:-.06em;margin-top:4px}.partyMeta{font-size:9px;color:var(--muted);line-height:1.35}.partyBar{height:5px;background:#eef0f3;border-radius:99px;overflow:hidden;margin-top:10px}.partyBar i{display:block;height:100%;background:#8b8f98;border-radius:99px}.partyNote{margin-top:10px;color:var(--muted);font-size:10px;line-height:1.45}.partyTools{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:0 0 10px;flex-wrap:wrap}.partyTools button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 11px;font-size:10px;cursor:pointer}.partyTools button.active{background:#111;color:#fff;border-color:#111}@media(max-width:850px){.partyGrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.partyGrid{grid-template-columns:1fr}.partyCard{display:grid;grid-template-columns:90px 1fr;gap:10px}.partyLogo{grid-row:1/4;margin:0}}
 </style>
 </head>
 <body>
@@ -91,7 +93,7 @@ footer{padding:25px 0 50px;color:var(--muted);font-size:8px;line-height:1.5}
 </div></div>
 </section>
 
-<section class="section" id="vorgaenge"><div class="head"><h2>Politische Vorgänge & Kosten</h2><span class="hint" id="count"></span></div>
+<section class="section partyExplorer" id="parteien"><div class="head"><h2>Parteien & dokumentierte Vorgänge</h2><span class="hint">neutraler Datenvergleich</span></div><div class="partyTools"><span class="hint">Anzahl der aktuell erfassten PULSE-Datensätze mit Parteibezug</span><button id="partyReset" type="button">Filter zurücksetzen</button></div><div class="partyGrid" id="partyGrid"></div><div class="partyNote">Die Zahl ist keine „Skandalzahl“: Ein Datensatz kann eine Untersuchung, Gerichtsentscheidung, Kostenposition, politische Auseinandersetzung oder einen anderen dokumentierten Vorgang darstellen. Parteizurechnung wird nur übernommen, wenn sie im Datensatz ausdrücklich belegt ist. Parteien werden deshalb nicht als „schlimmer“ oder „besser“ gerankt.</div></section><section class="section" id="vorgaenge"><div class="head"><h2>Politische Vorgänge & Kosten</h2><span class="hint" id="count"></span></div>
 <div class="tabs" id="tabs"><button class="tab active" data-filter="">Alle</button><button class="tab" data-filter="cost">Mit Kosten</button><button class="tab" data-filter="2026">2026</button><button class="tab" data-filter="open">Nicht beziffert</button></div>
 <div class="filters"><input id="q" class="input" placeholder="Vorgang, Person, Partei, Behörde …"><select id="cat" class="select"><option value="">Alle Themen</option></select><select id="status" class="select"><option value="">Alle Status</option></select><select id="party" class="select"><option value="">Alle Zuordnungen</option></select><select id="wp" class="select"><option value="">Alle Wahlperioden</option><option value="21">21. WP · 2025–</option><option value="20">20. WP · 2021–2025</option><option value="19">19. WP · 2017–2021</option></select></div>
 <div class="list" id="caseList"></div></section>
@@ -120,7 +122,23 @@ document.querySelector('#budgetBars').innerHTML=[
 ['Zinsausgaben','30,2 Mrd. €',5.8],
 ['Weitere Ausgaben','112,5 Mrd. €',21.4]
 ].map(x=>'<div class="barrow"><b>'+x[0]+' · '+x[1]+'</b><div class="bar"><i style="width:'+x[2]+'%"></i></div></div>').join('');
-setup();renderAll();renderPeople();renderConduct();renderSources();renderFinance();renderInbox();
+setup();renderParties();renderAll();renderPeople();renderConduct();renderSources();renderFinance();renderInbox();
+}
+function renderParties(){
+const defs=[
+['CDU/CSU','https://commons.wikimedia.org/wiki/Special:FilePath/Logo%20of%20the%20CDU%20CSU.svg'],
+['SPD','https://commons.wikimedia.org/wiki/Special:FilePath/SPD-Logo.svg'],
+['Bündnis 90/Die Grünen','https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BCndnis%2090%20-%20Die%20Gr%C3%BCnen%20Logo.svg'],
+['FDP','https://commons.wikimedia.org/wiki/Special:FilePath/Logo%20der%20Freien%20Demokraten.svg'],
+['AfD','https://commons.wikimedia.org/wiki/Special:FilePath/Alternative%20f%C3%BCr%20Deutschland%20Logo.svg'],
+['Die Linke','https://commons.wikimedia.org/wiki/Special:FilePath/Logo%20Die%20Linke%20(2023).svg'],
+['BSW','https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BCndnis%20Sahra%20Wagenknecht%20logo%202.svg'],
+['CSU','https://commons.wikimedia.org/wiki/Special:FilePath/CSU%20Logo.svg']
+];
+const rows=defs.map(([name,logo])=>{let n=DATA.filter(x=>String(x.party||'').toLowerCase()===name.toLowerCase()).length;return{name,logo,n}});const max=Math.max(1,...rows.map(x=>x.n));
+document.querySelector('#partyGrid').innerHTML=rows.map(x=>'<article class="partyCard" data-party="'+esc(x.name)+'"><div class="partyLogo"><img src="'+esc(x.logo)+'" alt="Logo '+esc(x.name)+'" loading="lazy" onerror="this.style.display=\'none\'"></div><div class="partyName">'+esc(x.name)+'</div><div class="partyCount">'+x.n+'</div><div class="partyMeta">erfasste Datensätze mit explizitem Parteibezug</div><div class="partyBar"><i style="width:'+Math.round(x.n/max*100)+'%"></i></div></article>').join('');
+document.querySelectorAll('.partyCard').forEach(card=>card.addEventListener('click',()=>{document.querySelector('#party').value=card.dataset.party;document.querySelectorAll('.partyCard').forEach(c=>c.classList.remove('active'));card.classList.add('active');renderAll();document.querySelector('#vorgaenge').scrollIntoView({behavior:'smooth',block:'start'})}));
+document.querySelector('#partyReset').onclick=()=>{document.querySelector('#party').value='';document.querySelectorAll('.partyCard').forEach(c=>c.classList.remove('active'));renderAll()};
 }
 function setup(){
 let add=(id,vals)=>{let el=document.querySelector(id);vals.forEach(v=>el.insertAdjacentHTML('beforeend','<option>'+esc(v)+'</option>'))};
