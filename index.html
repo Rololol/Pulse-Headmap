@@ -24,7 +24,7 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#aussagen">Aussagen</a><a href="#finanzen">Finanzen</a><a href="#quellen">Quellen</a></div></nav></div></header>
+<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#aussagen">Aussagen</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#quellen">Quellen</a></div></nav></div></header>
 <main class="wrap">
 <section class="hero"><div class="eyebrow">Transparenzregister · Stand 25.09.2026</div><h1>Deutschland.<br><span>belegt.</span></h1><p class="lead">Politische Vorgänge, Aussagen, Widersprüche, Ermittlungen, Gerichtsentscheidungen und öffentliche Kosten — in einer einzigen, durchsuchbaren Oberfläche. Jeder Eintrag soll auf eine nachvollziehbare Quelle zurückführen.</p><div class="updated">Daten werden laufend aus offiziellen Veröffentlichungen und geprüften Quellen ergänzt.</div></section>
 <section class="overview" id="overview"><div class="stat"><b id="nCases">—</b><span>dokumentierte Vorgänge</span></div><div class="stat"><b id="nParties">—</b><span>Parteien mit Datensätzen</span></div><div class="stat"><b id="nStatements">—</b><span>Aussagen / Prüfungen</span></div><div class="stat"><b id="nDecisions">—</b><span>Entscheidungen / Verfahren</span></div></section>
@@ -35,6 +35,8 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 <section class="section" id="vorgaenge"><div class="sectionHead"><h2>Vorgänge</h2><small id="caseCount">—</small></div><div class="controls" id="typeChips"><button class="chip active" data-type="">Alle</button><button class="chip" data-type="Aussage">Aussagen</button><button class="chip" data-type="Entscheidung">Entscheidungen</button><button class="chip" data-type="Ermittlung">Ermittlungen</button><button class="chip" data-type="Kosten">Kosten</button><button class="chip" data-type="Widerspruch">Widerspruch</button></div><div class="cases" id="caseList"></div></section>
 
 <section class="section" id="aussagen"><div class="sectionHead"><h2>Aussagen & Widersprüche</h2><small>Behauptung, Gegenquelle, Prüfung und Status getrennt</small></div><div class="tableWrap"><table class="table"><thead><tr><th>Person</th><th>Aussage / Vorgang</th><th>Status</th></tr></thead><tbody id="statementTable"></tbody></table></div><div class="note">„Falsch“, „irreführend“, „nicht belegt“ und „umstritten“ sind unterschiedliche Sachverhalte. PULSE übernimmt nur dokumentierte Bewertungen und kennzeichnet deren Quelle.</div></section>
+
+<section class="section" id="personen"><div class="sectionHead"><h2>Politiker & Transparenzprofil</h2><small>Ämter · Nebentätigkeiten · Einkünfte · Lobbykontakte · Abstimmungen · Verfahren</small></div><div class="controls" id="personChips"></div><div class="tableWrap"><table class="table"><thead><tr><th>Person</th><th>Partei / Funktion</th><th>Transparenzdaten</th><th>Vorgänge</th></tr></thead><tbody id="personTable"></tbody></table></div><div class="note">Erfasst werden nur öffentlich dokumentierte und belegbare Angaben. Nebentätigkeit oder Kontakt zu Interessenvertretern ist für sich genommen keine Pflichtverletzung. Bei Verfahren, Vorwürfen und Entscheidungen wird der jeweilige Status getrennt ausgewiesen.</div></section>
 
 <section class="section" id="finanzen"><div class="sectionHead"><h2>Staat & Finanzen</h2><small>amtliche Datenstände getrennt nach Abgrenzung</small></div><div class="finance"><div class="money"><b>2.081 Mrd. €</b><span>Staatliche Einnahmen 2025</span></div><div class="money"><b>2.208 Mrd. €</b><span>Staatliche Ausgaben 2025</span></div><div class="money"><b>−127,3 Mrd. €</b><span>Finanzierungsdefizit 2025</span></div><div class="money"><b>2.726 Mrd. €</b><span>öffentliche Schulden · aktueller Datenstand</span></div></div><div class="note">Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt. Pro-Kopf-Werte sind statistische Bezugsgrößen, keine individuelle Schuld. Quelle: Destatis.</div></section>
 
@@ -51,7 +53,7 @@ async function init(){
 DATA=await json("data.json",[]);let s=await json("data/statements.json",{items:[]}),c=await json("data/conduct.json",{items:[]}),i=await json("data/inbox.json",{items:[]}),f=await json("data/finance.json",{});
 STATEMENTS=s.items||[];CONDUCT=c.items||[];INBOX=i.items||[];FINANCE=f||{};
 const parties=[...new Set(DATA.map(x=>x.party).filter(Boolean))];document.getElementById("nCases").textContent=DATA.length.toLocaleString("de-DE");document.getElementById("nParties").textContent=parties.length;document.getElementById("nStatements").textContent=STATEMENTS.length+CONDUCT.length;document.getElementById("nDecisions").textContent=DATA.filter(x=>/entscheidung|gericht|urteil/i.test(txt(x))).length;
-renderParties(parties);renderCases();renderStatements();renderSources();
+renderParties(parties);renderCases();renderStatements();renderPeople();renderSources();
 document.getElementById("search").addEventListener("input",()=>{renderParties(parties);renderCases();renderStatements()});
 document.querySelectorAll("#typeChips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#typeChips .chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeType=b.dataset.type;renderCases()});
 }
@@ -71,6 +73,18 @@ document.querySelectorAll(".case").forEach(el=>el.onclick=()=>openDetail(DATA[+e
 function renderStatements(){
 let q=document.getElementById("search").value.toLowerCase().trim(),a=[...STATEMENTS,...CONDUCT].filter(x=>!q||txt(x).includes(q)).slice(0,60);
 document.getElementById("statementTable").innerHTML=a.map(x=>'<tr><td><b>'+esc(x.name||x.person||x.personId||"—")+'</b></td><td>'+esc(x.title||x.quote||x.statement||x.description||"Dokumentierte Aussage")+'</td><td><span class="tag">'+esc(x.status||x.result||x.category||"Prüfung")+'</span></td></tr>').join("")||'<tr><td colspan="3">Keine Einträge.</td></tr>';
+}
+function renderPeople(){
+const by=new Map();
+DATA.forEach(x=>String(x.people||"").split(",").map(v=>v.trim()).filter(Boolean).forEach(n=>{if(!by.has(n))by.set(n,{name:n,party:x.party||"",role:"",count:0})}));
+CONDUCT.forEach(x=>{if(x.name&&!by.has(x.name))by.set(x.name,{name:x.name,party:"",role:"",count:0})});
+STATEMENTS.forEach(x=>{if(x.name&&!by.has(x.name))by.set(x.name,{name:x.name,party:"",role:"",count:0})});
+by.forEach(p=>p.count=DATA.filter(x=>String(x.people||"").split(",").map(v=>v.trim()).includes(p.name)).length);
+const arr=[...by.values()].sort((a,b)=>b.count-a.count);
+document.getElementById("personChips").innerHTML='<button class="chip active" data-person="">Alle</button>'+arr.slice(0,15).map(p=>'<button class="chip" data-person="'+esc(p.name)+'">'+esc(p.name)+'</button>').join("");
+document.querySelectorAll("#personChips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#personChips .chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");const q=b.dataset.person;document.querySelectorAll("#personTable tr").forEach(r=>r.style.display=!q||r.dataset.person===q?"":"none")});
+document.getElementById("personTable").innerHTML=arr.map(p=>'<tr data-person="'+esc(p.name)+'"><td class="party">'+esc(p.name)+'</td><td>'+esc(p.party||"—")+'</td><td><span class="tag">Profil + Quellen</span></td><td class="num">'+p.count+'</td></tr>').join("")||'<tr><td colspan="4">Noch keine Personenprofile.</td></tr>';
+document.querySelectorAll("#personTable tr[data-person]").forEach(r=>r.onclick=()=>{const p=DATA.find(x=>String(x.people||"").split(",").map(v=>v.trim()).includes(r.dataset.person));if(p)openDetail(p);});
 }
 function renderSources(){
 let src=[...INBOX.slice(0,12),...DATA.filter(x=>x.source).slice(0,12)];document.getElementById("sourceTable").innerHTML=src.map(x=>'<tr><td>'+esc(x.publisher||x.sourceName||x.sourceType||"Quelle")+'</td><td>'+esc(x.title||x.scope||"Originalquelle")+'</td><td><a href="'+esc(x.url||x.source)+'" target="_blank" rel="noopener" style="color:#06f;text-decoration:none">↗</a></td></tr>').join("")||'<tr><td colspan="3">Quellen werden geladen.</td></tr>';
