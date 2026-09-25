@@ -84,18 +84,23 @@ function politicianEvents(){
 function renderFinance(){
  const s=FINANCE.state2025||{},d=FINANCE.debt2025||{},e=FINANCE.eu2025||{};
  const per=d.perCapitaEuro?Math.round(d.perCapitaEuro).toLocaleString("de-DE")+" €":"—";
+ const pop=(d.publicDebtMrd&&d.perCapitaEuro)?(d.publicDebtMrd*1000000000/d.perCapitaEuro):0;
+ const pc=v=>pop?(v*1000000000/pop).toLocaleString("de-DE",{maximumFractionDigits:0})+" €":"—";
  const cards=[
   ["2.081 Mrd. €","Staatliche Einnahmen 2025"],
   ["2.208 Mrd. €","Staatliche Ausgaben 2025"],
   ["−127,3 Mrd. €","Finanzierungsdefizit 2025"],
   [(d.publicDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Öffentliche Schulden"],
   [per,"öffentliche Schulden pro Kopf"],
+  [pc(2080.742),"Einnahmen rechnerisch pro Einwohner"],
+  [pc(2208.034),"Ausgaben rechnerisch pro Einwohner"],
+  [pc(127.325),"Defizit rechnerisch pro Einwohner"],
   [(d.bundDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden des Bundes"],
   [(d.landDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden der Länder"],
   [(e.debtRatioPct||0).toLocaleString("de-DE")+" %","Maastricht-Schuldenquote 2025"]
  ];
  document.getElementById("financeTop").innerHTML=cards.map(x=>'<div class="money"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join("");
- document.getElementById("financeNote").textContent="Pro-Kopf-Wert: "+per+". Er ist eine statistische Bezugsgröße und keine individuelle Rechnung oder persönliche Schuld. Nationale Schuldenstatistik und Maastricht-Abgrenzung werden getrennt dargestellt. Quelle: Destatis.";
+ document.getElementById("financeNote").textContent="Pro-Kopf-Wert: "+per+". Die Einnahmen-, Ausgaben- und Defizitwerte pro Einwohner sind rechnerische Bezugsgrößen auf derselben Bevölkerungsbasis; sie sind keine individuellen Rechnungen oder persönlichen Schulden. Nationale Schuldenstatistik und Maastricht-Abgrenzung werden getrennt dargestellt. Quelle: Destatis.";
 }
 function renderPoliticianChronicle(){
  const q=document.getElementById("search").value.toLowerCase().trim();
