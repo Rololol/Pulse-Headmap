@@ -1,0 +1,8 @@
+[
+  {"id":"bundestag-hib","publisher":"Deutscher Bundestag","type":"rss","url":"https://www.bundestag.de/static/appdata/includes/rss/hib.rss","scope":"hib","enabled":true},
+  {"id":"bundestag-drucksachen","publisher":"Deutscher Bundestag","type":"rss","url":"https://www.bundestag.de/static/appdata/includes/rss/drucksachen.rss","scope":"drucksachen","enabled":true},
+  {"id":"bundesrechnungshof","publisher":"Bundesrechnungshof","type":"html","url":"https://bundesrechnungshof.de/veroeffentlichungen/berichtssuche","scope":"berichte","enabled":true},
+  {"id":"bverfg","publisher":"Bundesverfassungsgericht","type":"html","url":"https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/","scope":"pressemitteilungen","enabled":true},
+  {"id":"bverwg","publisher":"Bundesverwaltungsgericht","type":"html","url":"https://www.bverwg.de/aktuelles","scope":"pressemitteilungen","enabled":true},
+  {"id":"bgh","publisher":"Bundesgerichtshof","type":"html","url":"https://www.bundesgerichtshof.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html?documentType_=pressrelease%20imgobject%20prdocument&sortOrder=dateOfIssue_dt%20desc","scope":"pressemitteilungen","enabled":true}
+]
