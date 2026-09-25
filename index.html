@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PULSE // GLOBAL HEADMAP</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--g:#00ff88;--bg:#030806;--panel:rgba(3,12,8,.94);--line:rgba(0,255,136,.22);--muted:#648878;--amber:#ffb000;--red:#ff3b30}
+*{box-sizing:border-box}html,body,#map{margin:0;width:100%;height:100%;background:var(--bg);font-family:"Courier New",monospace;color:#c8ffe2;overflow:hidden}
+.leaflet-tile{filter:grayscale(1) brightness(.38) contrast(1.35) sepia(.12) hue-rotate(70deg)}
+.leaflet-control-zoom a{background:#06110b!important;color:var(--g)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:#020604cc!important;color:#426653!important;font-size:8px}
+.scan,.vignette{position:fixed;inset:0;pointer-events:none;z-index:900}.scan{background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,255,136,.018) 4px)}.vignette{box-shadow:inset 0 0 150px #000,inset 0 0 35px #00ff8810}
+.top{position:fixed;z-index:1000;top:0;left:0;right:0;height:64px;background:#030c08ee;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:0 0 25px #00ff8812}
+.brand{color:var(--g);letter-spacing:3px;font-weight:bold}.sub{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:4px}.live{font-size:10px;color:var(--g)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g);margin-right:7px;animation:p 1.4s infinite}@keyframes p{50%{opacity:.25}}
+.panel{position:fixed;z-index:1000;background:var(--panel);border:1px solid var(--line);box-shadow:0 0 28px #0008,inset 0 0 22px #00ff8807;backdrop-filter:blur(6px)}.left{left:16px;top:82px;width:270px;padding:15px}.right{right:16px;top:82px;width:285px;padding:15px}.title{color:var(--g);font-size:10px;letter-spacing:2px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #00ff8815;font-size:9px}.row b{color:var(--g)}input{width:100%;background:#020805;border:1px solid var(--line);color:var(--g);padding:9px;font:10px "Courier New";outline:none}.btn{width:100%;margin-top:8px;padding:9px;background:#00ff8808;border:1px solid var(--line);color:var(--g);font:9px "Courier New";letter-spacing:1px;cursor:pointer}.btn:hover{background:#00ff8818;border-color:var(--g)}.event{display:grid;grid-template-columns:58px 1fr;padding:8px 0;border-bottom:1px solid #00ff8810;font-size:9px}.time{color:var(--muted)}.alert{color:var(--amber)}.danger{color:var(--red)}
+.bottom{position:fixed;z-index:1000;left:16px;right:16px;bottom:10px;display:flex;justify-content:space-between;color:#557364;font-size:8px;letter-spacing:1px;pointer-events:none}
+.target{width:18px;height:18px;border:1px solid var(--g);border-radius:50%;position:relative;box-shadow:0 0 10px #00ff8877}.target:before,.target:after{content:"";position:absolute;background:var(--g)}.target:before{width:1px;height:28px;left:8px;top:-6px}.target:after{height:1px;width:28px;left:-6px;top:8px}
+@media(max-width:850px){.right{display:none}.left{width:220px}}@media(max-width:600px){.left{display:none}.top{padding:0 12px}.brand{font-size:11px}.bottom{font-size:7px}}
+</style>
+</head>
+<body>
+<div id="map"></div><div class="scan"></div><div class="vignette"></div>
+<header class="top"><div><div class="brand">PULSE // GLOBAL HEADMAP</div><div class="sub">WORLDWIDE SITUATIONAL AWARENESS SYSTEM</div></div><div class="live"><span class="dot"></span>SYSTEM ONLINE &nbsp;|&nbsp; <span id="clock">00:00:00 UTC</span></div></header>
+
+<aside class="panel left">
+<div class="title">// CONTROL INTERFACE</div>
+<div class="row"><span>NETWORK</span><b>ONLINE</b></div><div class="row"><span>SAT-LINK</span><b>CONNECTED</b></div><div class="row"><span>ACTIVE NODES</span><b>137</b></div><div class="row"><span>THREATS</span><b style="color:var(--amber)">03</b></div>
+<br>
+<div class="title">// TARGET SEARCH</div>
+<input id="q" placeholder="CITY / COUNTRY..." onkeydown="if(event.key==='Enter')search()"><button class="btn" onclick="search()">ACQUIRE TARGET</button>
+<button class="btn" onclick="locate()">LOCATE MY POSITION</button>
+<br>
+<div class="title">// CURSOR</div><div class="row"><span>LAT</span><b id="lat">--</b></div><div class="row"><span>LON</span><b id="lon">--</b></div>
+</aside>
+
+<aside class="panel right">
+<div class="title">// LIVE INTELLIGENCE FEED</div>
+<div id="feed">
+<div class="event"><span class="time">NOW</span><span>Global network synchronized.</span></div>
+<div class="event"><span class="time">11:06</span><span>Satellite telemetry updated.</span></div>
+<div class="event"><span class="time">11:05</span><span class="alert">Increased activity detected.</span></div>
+<div class="event"><span class="time">11:03</span><span>Regional database synchronized.</span></div>
+<div class="event"><span class="time">11:00</span><span class="danger">Unknown signal detected.</span></div>
+</div>
+</aside>
+<div class="bottom"><span>PULSE-01 // GLOBAL MONITOR</span><span>ENCRYPTED CONNECTION</span><span>OPEN DATA PROTOTYPE</span></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map=L.map('map',{minZoom:2,maxZoom:18,worldCopyJump:true}).setView([20,0],3);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const icon=L.divIcon({className:'',html:'<div class="target"></div>',iconSize:[18,18],iconAnchor:[9,9]});
+const points=[
+['BERLIN','GERMANY',52.52,13.405],['WASHINGTON','USA',38.9072,-77.0369],
+['LONDON','UK',51.5074,-.1278],['TOKYO','JAPAN',35.6762,139.6503],
+['SINGAPORE','SINGAPORE',1.3521,103.8198]
+];
+points.forEach(p=>{L.marker([p[2],p[3]],{icon}).addTo(map).bindPopup('<b style="color:#00ff88">'+p[0]+'</b><br>'+p[1]+'<br>LAT '+p[2].toFixed(4)+'<br>LON '+p[3].toFixed(4)})});
+map.on('mousemove',e=>{lat.textContent=e.latlng.lat.toFixed(5);lon.textContent=e.latlng.lng.toFixed(5)});
+async function search(){const q=document.getElementById('q').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q));const d=await r.json();if(!d.length){alert('TARGET NOT FOUND');return}const x=d[0],a=+x.lat,b=+x.lon;map.flyTo([a,b],8,{duration:2});L.marker([a,b],{icon}).addTo(map).bindPopup('<b style="color:#00ff88">TARGET ACQUIRED</b><br>'+x.display_name+'<br>LAT '+a.toFixed(5)+'<br>LON '+b.toFixed(5)).openPopup()}catch(e){alert('NETWORK ERROR')}} 
+function locate(){if(!navigator.geolocation)return; navigator.geolocation.getCurrentPosition(p=>map.flyTo([p.coords.latitude,p.coords.longitude],10,{duration:2}),()=>alert('LOCATION UNAVAILABLE'))}
+setInterval(()=>{clock.textContent=new Date().toISOString().slice(11,19)+' UTC'},1000);
+</script>
+</body>
+</html>
