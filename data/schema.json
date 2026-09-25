@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"PULSE Politikdatenbank",
+  "type":"object",
+  "required":["id","title","eventDate","category","source","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "title":{"type":"string"},
+    "summary":{"type":"string"},
+    "eventDate":{"type":"string","format":"date"},
+    "dateFrom":{"type":["string","null"],"format":"date"},
+    "dateTo":{"type":["string","null"],"format":"date"},
+    "legislaturperiod":{"type":["integer","null"]},
+    "category":{"type":"string"},
+    "status":{"type":"string"},
+    "partyIds":{"type":"array","items":{"type":"string"}},
+    "personIds":{"type":"array","items":{"type":"string"}},
+    "ministry":{"type":["string","null"]},
+    "jurisdiction":{"type":["string","null"]},
+    "location":{"type":["object","null"],"properties":{"state":{"type":["string","null"]},"district":{"type":["string","null"]},"lat":{"type":["number","null"]},"lon":{"type":["number","null"]}}},
+    "costs":{"type":"array","items":{"type":"object","required":["type","display"],"properties":{"type":{"enum":["incurred","liability","planned","potential","tax_expenditure","recovery","unknown"]},"display":{"type":"string"},"amountEur":{"type":["number","null"]},"lowEur":{"type":["number","null"]},"highEur":{"type":["number","null"]},"currency":{"type":"string"}}}},
+    "documents":{"type":"array","items":{"type":"object","required":["url"],"properties":{"url":{"type":"string","format":"uri"},"title":{"type":["string","null"]},"documentType":{"type":["string","null"]},"reference":{"type":["string","null"]},"publishedAt":{"type":["string","null"]}}}},
+    "sources":{"type":"array","items":{"type":"object","required":["url","publisher"],"properties":{"url":{"type":"string","format":"uri"},"publisher":{"type":"string"},"retrievedAt":{"type":["string","null"]}}}},
+    "confidence":{"enum":["high","medium","low"]},
+    "reviewState":{"enum":["reviewed","needs_review","rejected"]},
+    "updatedAt":{"type":"string"}
+  }
+}
