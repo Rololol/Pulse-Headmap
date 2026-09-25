@@ -72,7 +72,9 @@ footer{padding:25px 0 50px;color:var(--muted);font-size:8px;line-height:1.5}
 <div style="font-size:8px;color:var(--muted);margin-top:8px">Quelle: <a href="https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/07/PD26_267_713.html" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Destatis, 29.07.2026</a> · <a href="https://www.destatis.de/DE/Themen/Wirtschaft/Volkswirtschaftliche-Gesamtrechnungen-Inlandsprodukt/Tabellen/eu-stabilitaetspakt-defizit-deutschland.html" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Destatis, EU-Haushaltsüberwachung</a></div>
 </section>
 
-<section class="section" id="kosten"><div class="head"><h2>Was kostet es Bürger rechnerisch?</h2><span class="hint">Bundesebene · keine individuelle Steuerrechnung</span></div>
+<section class="section" id="staat"><div class="head"><h2>Staat insgesamt</h2><span class="hint">Bund · Länder · Gemeinden · Sozialversicherung</span></div><div class="kpis" id="stateKpis"></div><p class="note">Gesamtstaatliche Finanzstatistik und Bundeshaushalt werden bewusst getrennt. Pro-Kopf-Werte sind statistische Bezugsgrößen, keine persönliche Rechnung.</p></section>
+<section class="section" id="schulden"><div class="head"><h2>Schulden</h2><span class="hint">aktueller veröffentlichter Datenstand</span></div><div class="kpis" id="debtKpis"></div><div class="simplegrid" id="debtExtra" style="margin-top:8px"></div><p class="note">Nationale Schuldenstatistik und Maastricht-Schulden werden nicht vermischt. Die unterschiedlichen Abgrenzungen können deshalb unterschiedliche Summen ausweisen.</p></section>
+<section class="section" id="kosten"><div class="head"><h2>Was kostet es Bürger rechnerisch?</h2><span class="hint">statistische Bezugsgrößen</span></div><div class="head"><h2>Was kostet es Bürger rechnerisch?</h2><span class="hint">Bundesebene · keine individuelle Steuerrechnung</span></div>
 <div class="kpis">
 <div class="kpi"><b>6.290 €</b><span>Bundeshaushalt 2026 je Einwohner</span></div>
 <div class="kpi"><b>4.644 €</b><span>veranschlagte Steuereinnahmen je Einwohner</span></div>
@@ -94,13 +96,15 @@ footer{padding:25px 0 50px;color:var(--muted);font-size:8px;line-height:1.5}
 <div class="filters"><input id="q" class="input" placeholder="Vorgang, Person, Partei, Behörde …"><select id="cat" class="select"><option value="">Alle Themen</option></select><select id="status" class="select"><option value="">Alle Status</option></select><select id="party" class="select"><option value="">Alle Zuordnungen</option></select><select id="wp" class="select"><option value="">Alle Wahlperioden</option><option value="21">21. WP · 2025–</option><option value="20">20. WP · 2021–2025</option><option value="19">19. WP · 2017–2021</option></select></div>
 <div class="list" id="caseList"></div></section>
 
+<section class="section" id="inbox"><div class="head"><h2>Prüf-Inbox</h2><span class="hint">amtliche Veröffentlichungen · noch nicht redaktionell bewertet</span></div><div class="filters"><input id="inboxQ" class="input" placeholder="Quelle, Titel, Thema …"><select id="inboxSource" class="select"><option value="">Alle Quellen</option></select><select id="inboxState" class="select"><option value="">Alle Status</option><option value="needs_review">needs_review</option></select></div><div class="list" id="inboxList"></div><p class="note" style="margin-top:10px">Ein Treffer in dieser Inbox ist keine Feststellung eines Fehlverhaltens. Erst nach Prüfung wird daraus ein veröffentlichter PULSE-Vorgang.</p></section>
 <details class="section" id="personen"><summary>Personen, Ämter & Gremien</summary><div class="detailbody"><p class="note">Funktionen werden zeitbezogen und mit Quelle dokumentiert. Eine Funktion ist keine politische Bewertung.</p><div class="personGrid" id="people"></div></div></details>
+<details class="section" id="quellen"><summary>Quellen & Methodik</summary><div class="detailbody"><p class="note">Primärquellen haben Vorrang. Jede Zahl erhält Datenstand, Abgrenzung und Quelle. Kostenarten werden getrennt: angefallen, Zahlungsverpflichtung, geplant/potenziell und Einnahmeverzicht.</p><div class="sourceGrid" id="financeSources"></div><div style="height:10px"></div><div class="simplegrid"><div class="mini"><b>Fakt</b><span>Amtlich belegter Sachverhalt.</span></div><div class="mini"><b>Prüfung</b><span>Vorwurf, Untersuchung oder Prüfbericht bleibt als solcher gekennzeichnet.</span></div><div class="mini"><b>Gericht</b><span>Entscheidung und Verfahrensstatus werden getrennt dokumentiert.</span></div></div></div></details>
 <details class="section" id="mehr"><summary>Verhalten, Aussagen, Widersprüche & Quellen</summary><div class="detailbody"><p class="note">PULSE vergibt keine persönliche Glaubwürdigkeitszahl. Aussage, Kontext, Gegenprüfung, Reaktion, Korrektur und Quelle werden getrennt dokumentiert.</p><div class="conductGrid" id="conduct"></div><div style="height:10px"></div><div class="sourceGrid" id="sources"></div></div></details>
 </main>
 <footer><div class="wrap">PULSE·DE · Recherche- und Dokumentationssystem. Bundeshaushalt und gesamtstaatliche Finanzstatistik werden getrennt ausgewiesen. Jede Kennzahl soll auf eine Primärquelle zurückführbar sein.</div></footer>
 
 <script>
-let DATA=[],ROLES=[],CONDUCT=[],STATEMENTS=[],quick='';
+let DATA=[],ROLES=[],CONDUCT=[],STATEMENTS=[],INBOX=[],FINANCE={},quick='';
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const year=x=>String(x.year||x.eventDate||x.date||'').slice(0,4);
 const costClass=t=>{let s=String(t||'').toLowerCase();if(s.includes('rück'))return'recovery';if(s.includes('steuer'))return'tax';if(s.includes('geplant'))return'planned';if(s.includes('potenzi'))return'potential';if(s.includes('verpflicht'))return'liability';return'incurred'};
@@ -108,7 +112,7 @@ const wp=x=>{let y=+year(x);if(y>=2025)return 21;if(y>=2021)return 20;if(y>=2017
 async function get(p){try{return await fetch(p,{cache:'no-store'}).then(r=>r.json())}catch(e){return{items:[]}}}
 async function init(){
 try{DATA=await fetch('data.json',{cache:'no-store'}).then(r=>r.json())}catch(e){DATA=[]}
-let r=await get('data/roles.json'),c=await get('data/conduct.json'),s=await get('data/statements.json');ROLES=r.items||[];CONDUCT=c.items||[];STATEMENTS=s.items||[];
+let r=await get('data/roles.json'),c=await get('data/conduct.json'),s=await get('data/statements.json'),ib=await get('data/inbox.json'),fi=await get('data/finance.json');ROLES=r.items||[];CONDUCT=c.items||[];STATEMENTS=s.items||[];INBOX=ib.items||[];FINANCE=fi||{};
 document.querySelector('#count').textContent=DATA.length+' Vorgänge';
 document.querySelector('#budgetBars').innerHTML=[
 ['Laufende Zuschüsse','323,4 Mrd. €',61.7],
@@ -116,12 +120,12 @@ document.querySelector('#budgetBars').innerHTML=[
 ['Zinsausgaben','30,2 Mrd. €',5.8],
 ['Weitere Ausgaben','112,5 Mrd. €',21.4]
 ].map(x=>'<div class="barrow"><b>'+x[0]+' · '+x[1]+'</b><div class="bar"><i style="width:'+x[2]+'%"></i></div></div>').join('');
-setup();renderAll();renderPeople();renderConduct();renderSources();
+setup();renderAll();renderPeople();renderConduct();renderSources();renderFinance();renderInbox();
 }
 function setup(){
 let add=(id,vals)=>{let el=document.querySelector(id);vals.forEach(v=>el.insertAdjacentHTML('beforeend','<option>'+esc(v)+'</option>'))};
 add('#cat',[...new Set(DATA.map(x=>x.category).filter(Boolean))].sort());add('#status',[...new Set(DATA.map(x=>x.status).filter(Boolean))].sort());add('#party',[...new Set(DATA.map(x=>x.party).filter(Boolean))].sort());
-['q','cat','status','party','wp'].forEach(id=>document.querySelector('#'+id).addEventListener('input',renderAll));
+['q','cat','status','party','wp'].forEach(id=>document.querySelector('#'+id).addEventListener('input',renderAll));['inboxQ','inboxSource','inboxState'].forEach(id=>document.querySelector('#'+id)?.addEventListener('input',renderInbox));
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');quick=b.dataset.filter;renderAll()})
 }
 function filtered(){
@@ -131,6 +135,19 @@ return DATA.filter(x=>{let text=[x.title,x.summary,x.party,x.people,x.agency,x.c
 function renderAll(){let a=filtered();document.querySelector('#count').textContent=a.length+' von '+DATA.length;document.querySelector('#caseList').innerHTML=a.map(x=>'<article class="item"><div class="itemTop"><span class="pill">'+esc(x.category)+' · '+esc(x.year)+'</span><span class="date">'+esc(x.status)+'</span></div><h3>'+esc(x.title)+'</h3><p>'+esc(x.summary)+'</p><div class="costbox '+costClass(x.costType)+'"><b>'+esc(x.costDisplay||'Nicht beziffert')+'</b><small>'+esc(x.costType||'Keine Kostenangabe')+'</small></div></article>').join('')||'<div class="mini">Keine Treffer.</div>'}
 function renderPeople(){let names=new Map();ROLES.forEach(x=>names.set(x.name,x));DATA.forEach(x=>String(x.people||'').split(',').map(v=>v.trim()).filter(Boolean).forEach(n=>{if(!names.has(n))names.set(n,{name:n,role:'Personenbezug in Vorgängen',body:'PULSE-Datensatz'})}));document.querySelector('#people').innerHTML=[...names.values()].slice(0,12).map(x=>'<article class="person"><b>'+esc(x.name)+'</b><span>'+esc(x.role)+' · '+esc(x.body)+'</span>'+(x.source?'<a href="'+esc(x.source)+'" target="_blank" rel="noopener">Quelle ↗</a>':'')+'</article>').join('')}
 function renderConduct(){let a=[...CONDUCT,...STATEMENTS.map(x=>({...x,category:'Äußerung'}))];document.querySelector('#conduct').innerHTML=a.length?a.slice(0,12).map(x=>'<article class="conduct"><b>'+esc(x.title||'Dokumentierte Aussage')+'</b><span>'+esc(x.name||x.personId||'')+' · '+esc(x.date||'')+'</span><span>'+esc(x.description||x.quote||'Quelle und Kontext werden getrennt dokumentiert.')+'</span></article>').join(''):'<article class="conduct"><b>Prüfarchiv wird aufgebaut</b><span>Neue Einträge landen zunächst in der Prüf-Inbox.</span></article>'}
+function renderFinance(){
+const s=FINANCE.state2025||{},d=FINANCE.debt2025||{},e=FINANCE.eu2025||{};
+document.querySelector('#stateKpis').innerHTML=[['2.081 Mrd. €','Einnahmen 2025'],['2.208 Mrd. €','Ausgaben 2025'],['−127,3 Mrd. €','Finanzierungsdefizit 2025'],['1.199,1 Mrd. €','Finanzvermögen Ende 2025']].map(x=>'<div class="kpi"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+document.querySelector('#debtKpis').innerHTML=[[(d.publicDebtMrd||0).toLocaleString('de-DE',{maximumFractionDigits:1})+' Mrd. €','öffentliche Schulden'],[(d.bundDebtMrd||0).toLocaleString('de-DE',{maximumFractionDigits:1})+' Mrd. €','Bund'],[(d.landDebtMrd||0).toLocaleString('de-DE',{maximumFractionDigits:1})+' Mrd. €','Länder'],[(d.perCapitaEuro||0).toLocaleString('de-DE')+' €','je Einwohner']].map(x=>'<div class="kpi"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+document.querySelector('#debtExtra').innerHTML=[['+151,4 Mrd. €','Veränderung 2025 gegenüber 2024'],['63,5 %','Maastricht-Schuldenquote 2025'],['49,54 Mrd. €','konsolidierte Zinsen 2025']].map(x=>'<div class="mini"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+document.querySelector('#financeSources').innerHTML=(FINANCE.sources||[]).map(x=>'<article class="source"><b>'+esc(x.publisher)+'</b><span>'+esc(x.title)+'</span><a href="'+esc(x.url)+'" target="_blank" rel="noopener">Originalquelle ↗</a></article>').join('');
+}
+function renderInbox(){
+let q=(document.querySelector('#inboxQ')?.value||'').toLowerCase(),src=document.querySelector('#inboxSource')?.value||'',st=document.querySelector('#inboxState')?.value||'';
+let pubs=[...new Set(INBOX.map(x=>x.publisher).filter(Boolean))];let sel=document.querySelector('#inboxSource');if(sel && sel.options.length===1)pubs.sort().forEach(x=>sel.insertAdjacentHTML('beforeend','<option>'+esc(x)+'</option>'));
+let a=INBOX.filter(x=>(!q||[x.title,x.publisher,x.scope].join(' ').toLowerCase().includes(q))&&(!src||x.publisher===src)&&(!st||x.reviewState===st)).sort((a,b)=>String(b.publishedAt).localeCompare(String(a.publishedAt)));
+document.querySelector('#inboxList').innerHTML=a.map(x=>'<article class="item"><div class="itemTop"><span class="pill">'+esc(x.publisher)+'</span><span class="date">'+esc(x.publishedAt||'')+'</span></div><h3>'+esc(x.title)+'</h3><p>Prüfstatus: '+esc(x.reviewState)+' · '+esc(x.scope)+'</p><a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;color:var(--blue);font-size:9px;text-decoration:none">Originalquelle ↗</a></article>').join('')||'<div class="mini">Keine Treffer.</div>';
+}
 function renderSources(){let m=new Map();DATA.forEach(x=>{if(x.source&&!m.has(x.source))m.set(x.source,x)});document.querySelector('#sources').innerHTML=[...m.values()].slice(0,12).map(x=>'<article class="source"><b>'+esc(x.sourceName||x.sourceType||'Quelle')+'</b><span>'+esc(x.title)+'</span><a href="'+esc(x.source)+'" target="_blank" rel="noopener">Quelle öffnen ↗</a></article>').join('')}
 init();
 </script>
