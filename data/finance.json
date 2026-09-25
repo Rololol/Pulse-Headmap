@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-25",
+  "state2025": {
+    "revenueMrd": 2080.742,
+    "spendingMrd": 2208.034,
+    "deficitMrd": -127.325,
+    "sourceDate": "2026-04-07",
+    "source": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/04/PD26_117_711.html"
+  },
+  "debt2025": {
+    "publicDebtMrd": 2726,
+    "bundDebtMrd": 1885,
+    "landDebtMrd": 642,
+    "perCapitaEuro": 31887,
+    "sourceDate": "2026-09-25",
+    "source": "https://www.destatis.de/DE/Themen/Staat/Oeffentliche-Finanzen/Schulden-Finanzvermoegen/_inhalt.html"
+  },
+  "eu2025": {
+    "debtMrd": 2838.24,
+    "debtRatioPct": 63.5,
+    "deficitMrd": -119.15,
+    "interestMrd": 49.54,
+    "sourceDate": "2026-04-22",
+    "source": "https://www.destatis.de/DE/Themen/Wirtschaft/Volkswirtschaftliche-Gesamtrechnungen-Inlandsprodukt/Tabellen/eu-stabilitaetspakt-defizit-deutschland.html"
+  },
+  "methodology": [
+    "Bundeshaushalt und gesamtstaatliche Finanzstatistik werden getrennt dargestellt.",
+    "Pro-Kopf-Werte sind statistische Bezugsgrößen und keine individuellen Rechnungen.",
+    "Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt.",
+    "Nur belegte Kosten werden als Kosten aggregiert; geplante oder potenzielle Ausgaben bleiben getrennt."
+  ]
+}
