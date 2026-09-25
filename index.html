@@ -99,7 +99,7 @@ footer{padding:42px 0 70px;color:var(--muted);font-size:10px;line-height:1.6}
 let DATA=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const ym=x=>String(x.date||x.year).slice(0,7);
-async function init(){try{DATA=await fetch('data.json',{cache:'no-store'}).then(r=>r.json())}catch(e){DATA=[]}setup();render();renderParties();drawChart();renderTimeline();updateQuick()}
+async function init(){try{DATA=await fetch('data.json',{cache:'no-store'}).then(r=>r.json())}catch(e){DATA=[]}setup();render();renderParties();drawChart();renderTimeline();renderSources();updateQuick()}
 function setup(){
 const cats=[...new Set(DATA.map(x=>x.category))].sort(), sts=[...new Set(DATA.map(x=>x.status))].sort(), parties=[...new Set(DATA.map(x=>x.party))].sort(), costtypes=[...new Set(DATA.map(x=>x.costType))].sort();
 document.querySelector('#category').innerHTML+='<option>'+cats.map(esc).join('</option><option>')+'</option>';
