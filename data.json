@@ -557,5 +557,22 @@
     "updated": "2026-09-25",
     "confidence": "hoch",
     "editorialLabel": "Prüfbericht / Digitalisierung"
+  },
+  {
+    "id": "kalayci-bestechlichkeit",
+    "title": "Dilek Kalayci: Bestechlichkeit",
+    "year": "2025",
+    "date": "2025-12-30",
+    "category": "Gericht",
+    "party": "SPD",
+    "people": "Dilek Kalayci",
+    "status": "Rechtskräftig verurteilt",
+    "sourceName": "Landgericht Berlin I / rbb",
+    "source": "https://www.berlin.de/gerichte/presse/pressemitteilungen-der-ordentlichen-gerichtsbarkeit/2025/pressemitteilung.1548619.php",
+    "summary": "Die frühere Berliner Gesundheitssenatorin wurde wegen Bestechlichkeit verurteilt; der BGH bestätigte das Urteil.",
+    "detail": "1 Jahr 6 Monate auf Bewährung und Einziehung von 6.240 Euro.",
+    "updated": "2026-09-25",
+    "confidence": "hoch",
+    "editorialLabel": "Gerichtliche Verurteilung"
   }
 ]
