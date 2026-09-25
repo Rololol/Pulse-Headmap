@@ -25,7 +25,7 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#chronik">Politiker</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#quellen">Quellen</a></div></nav></div></header>
+<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#chronik">Politiker</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#lobby">Lobby</a><a href="#quellen">Quellen</a></div></nav></div></header>
 <main class="wrap">
 <section class="hero"><div class="eyebrow">Transparenzregister · Stand 25.09.2026</div><h1>Deutschland.<br><span>belegt.</span></h1><p class="lead">Staatsfinanzen zuerst. Danach dokumentierte Vorgänge und eine chronologische Politiker-Ansicht für Aussagen, Entscheidungen, Abstimmungen, Positionsänderungen, Korrekturen und Verfahren. Jeder Eintrag führt zu einer nachvollziehbaren Quelle.</p><div class="updated">Daten werden laufend aus offiziellen Veröffentlichungen und geprüften Quellen ergänzt.</div></section>
 <section class="section" id="finanzen"><div class="sectionHead"><h2>Staat & Finanzen</h2><small>amtliche Datenstände · zuerst im Überblick</small></div><div class="finance" id="financeTop"></div><div class="note" id="financeNote">Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt. Pro-Kopf-Werte sind statistische Bezugsgrößen und keine individuelle Schuld. Quelle: Destatis.</div></section>
@@ -42,20 +42,21 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 
 
 
+<section class="section compactSection expanded" id="lobby"><div class="sectionHead"><h2>Lobby & Einfluss</h2><small>Registerdaten · Drehtür · Stellungnahmen · Kontakte</small><button class="sectionToggle" data-target="lobby">Schließen</button></div><div class="finance" id="lobbyStats"></div><div class="cases" id="lobbyList"></div><div class="note">Ein Lobbyeintrag ist keine Feststellung unzulässiger Einflussnahme. PULSE trennt Registerfakten, Transparenzfragen, Prüfverfahren und gerichtliche Feststellungen.</div></section>
 <section class="section compactSection" id="quellen"><div class="sectionHead"><h2>Quellen & Prüfstand</h2><small>Originaldokumente zuerst</small><button class="sectionToggle" data-target="quellen">Öffnen</button></div><div class="tableWrap"><table class="table"><tbody id="sourceTable"></tbody></table></div><div class="note">Neue amtliche Veröffentlichungen landen zunächst in der Prüf-Inbox. Ein automatischer Treffer wird nicht als Fehlverhalten veröffentlicht.</div></section>
 </main>
 <footer><div class="wrap">PULSE·DE · Transparenz- und Dokumentationssystem · Datenstand 25.09.2026</div></footer>
 <div class="drawer" id="drawer"><div class="panel"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
-let DATA=[],STATEMENTS=[],CONDUCT=[],INBOX=[],FINANCE={},activeParty="",activeType="",activeEventType="",activePerson="";
+let DATA=[],STATEMENTS=[],CONDUCT=[],INBOX=[],FINANCE={},LOBBY={},activeParty="",activeType="",activeEventType="",activePerson="";
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const txt=x=>[x.title,x.summary,x.party,x.people,x.agency,x.category,x.status,x.statement,x.quote,x.description,x.name,x.person,x.type].join(" ").toLowerCase();
 async function json(p,d){try{return await fetch(p+"?v=20260925",{cache:"no-store"}).then(r=>r.json())}catch(e){return d}}
 async function init(){
-DATA=await json("data.json",[]);let s=await json("data/statements.json",{items:[]}),c=await json("data/conduct.json",{items:[]}),i=await json("data/inbox.json",{items:[]}),f=await json("data/finance.json",{});
+DATA=await json("data.json",[]);let s=await json("data/statements.json",{items:[]}),c=await json("data/conduct.json",{items:[]}),i=await json("data/inbox.json",{items:[]}),f=await json("data/finance.json",{});LOBBY=await json("data/lobby.json",{});
 STATEMENTS=s.items||[];CONDUCT=c.items||[];INBOX=i.items||[];FINANCE=f||{};
 const parties=[...new Set(DATA.map(x=>x.party).filter(Boolean))];document.getElementById("nCases").textContent=DATA.length.toLocaleString("de-DE");document.getElementById("nParties").textContent=parties.length;document.getElementById("nStatements").textContent=STATEMENTS.length+CONDUCT.length;document.getElementById("nDecisions").textContent=DATA.filter(x=>/entscheidung|gericht|urteil/i.test(txt(x))).length;
-renderFinance();renderParties(parties);renderCases();renderPoliticianChronicle();renderPeople();renderSources();
+renderFinance();renderLobby();renderParties(parties);renderCases();renderPoliticianChronicle();renderPeople();renderSources();
 document.getElementById("search").addEventListener("input",()=>{renderParties(parties);renderCases();renderPoliticianChronicle();renderPeople()});
 document.querySelectorAll("#typeChips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#typeChips .chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeType=b.dataset.type;renderCases()});
 document.querySelectorAll(".sectionToggle").forEach(b=>b.onclick=()=>{const s=document.getElementById(b.dataset.target);const open=s.classList.toggle("expanded");b.textContent=open?"Schließen":"Öffnen"});
@@ -103,6 +104,16 @@ function renderFinance(){
  ];
  document.getElementById("financeTop").innerHTML=cards.map(x=>'<div class="money"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join("");
  document.getElementById("financeNote").textContent="Pro-Kopf-Wert: "+per+". Die Einnahmen-, Ausgaben- und Defizitwerte pro Einwohner sind rechnerische Bezugsgrößen auf derselben Bevölkerungsbasis; sie sind keine individuellen Rechnungen oder persönlichen Schulden. Nationale Schuldenstatistik und Maastricht-Abgrenzung werden getrennt dargestellt. Quelle: Destatis.";
+}
+function renderLobby(){
+ const s=LOBBY.stats||{},t=LOBBY.tracked||[];
+ document.getElementById("lobbyStats").innerHTML=[
+  [Number(s.totalEntries||0).toLocaleString("de-DE"),"Lobbyregister-Einträge"],
+  [Number(s.entriesWithRevolvingDoorInfo||0).toLocaleString("de-DE"),"mit Drehtür-Angaben"],
+  [Number(s.currentOrLastFiveYears?.federalGovernment||0),"Regierungsamt · aktuell/letzte 5 Jahre"],
+  [Number(s.currentOrLastFiveYears?.bundestagMember||0),"MdB · aktuell/letzte 5 Jahre"]
+ ].map(x=>'<div class="money"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join("");
+ document.getElementById("lobbyList").innerHTML=t.map(x=>'<article class="case"><div class="caseDate">'+esc(x.date)+'</div><div><h3>'+esc(x.person)+' · '+esc(x.type)+'</h3><p>'+esc(x.title)+' — '+esc(x.description)+'</p></div><div class="caseState"><span class="tag">'+esc(x.status)+'</span><br><a href="'+esc(x.source)+'" target="_blank" rel="noopener">Quelle ↗</a></div></article>').join("");
 }
 function renderPoliticianChronicle(){
  const q=document.getElementById("search").value.toLowerCase().trim();
