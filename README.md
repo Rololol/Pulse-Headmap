@@ -12,6 +12,9 @@ PULSE·DE ist ein neutrales Recherche- und Dokumentationssystem für politische 
 - Quellenlinks und getrennte Kostentypen
 - GitHub Actions Research Monitor
 - Mobile-first Layout
+- Gesamtstaatliche Einnahmen, Ausgaben, Defizit und Finanzvermögen
+- Öffentliche Schulden mit Pro-Kopf-Kennzahl und Maastricht-Abgrenzung
+- Sichtbare Trennung von Bundeshaushalt und gesamtstaatlicher Finanzstatistik
 
 ## Datenmodell
 
@@ -35,6 +38,10 @@ Der Bundestag stellt RSS-Feeds für Pressemitteilungen, Kurzmeldungen, Drucksach
 4. Bundesministerien und Bundesbehörden
 5. Landesrechnungshöfe / Landesparlamente
 6. seriöse Medien zur Einordnung
+
+## Transparenzprinzip
+
+Jede Kennzahl soll mit Datenstand, Abgrenzung, Berechnung und Primärquelle nachvollziehbar sein. Nationale Schuldenstatistik und Maastricht-Schulden werden nicht vermischt. Pro-Kopf-Werte sind statistische Bezugsgrößen und keine individuellen Rechnungen. Politische Vorgänge werden nicht automatisch als Fehltritt, Skandal oder Glaubwürdigkeitsverlust klassifiziert.
 
 ## Nächste Ausbaustufe
 
