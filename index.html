@@ -116,7 +116,7 @@ function renderParties(){
 const parties=[
 ["CDU/CSU","CDU/CSU",208],["AfD","AfD",150],["SPD","SPD",120],["Bündnis 90/Die Grünen","B90/Grüne",85],["Die Linke","Die Linke",64],["SSW","SSW",1],["FDP","FDP",0],["BSW","BSW",0]
 ];
-const rows=parties.map(p=>{const a=DATA.filter(x=>x.party===p[0]);const numeric=a.reduce((s,x)=>s+((x.costDisplay||"").match(/€([0-9,.]+) Mio\./)?.[1]?parseFloat((x.costDisplay.match(/€([0-9,.]+) Mio\./)[1]).replace(",",".")):0),0);return [p[0],a.length,numeric?p[1]:"—",p[2]]});
+const rows=parties.map(p=>{const a=DATA.filter(x=>x.party===p[0]);const numeric=a.reduce((s,x)=>s+((x.costDisplay||"").match(/€([0-9,.]+) Mio\./)?.[1]?parseFloat((x.costDisplay.match(/€([0-9,.]+) Mio\./)[1]).replace(",",".")):0),0);return [p[0],a.length,numeric?"€"+String(numeric).replace(".",",")+" Mio.":"—",p[2]]});
 document.querySelector("#partytable").innerHTML='<div class="partyrow head"><span>Partei / Fraktion</span><span>Vorgänge</span><span>bezifferte Kosten*</span><span>Bundestag 2025</span></div>'+rows.map(r=>'<div class="partyrow"><b>'+esc(r[0])+'</b><span class="partycount">'+r[1]+'</span><span>'+esc(r[2])+'</span><span class="partynote">'+(r[3]?r[3]+' Sitze':'nicht eingezogen')+'</span></div>').join('')+'<div class="partynote">* Nur direkt parteilich zugeordnete, numerisch vergleichbare Beträge. Parteiübergreifende und nicht zugerechnete Fälle werden nicht auf einzelne Parteien verteilt.</div>';
 }
 function drawChart(){
