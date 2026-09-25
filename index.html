@@ -23,7 +23,9 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 @media(max-width:700px){.overview{grid-template-columns:repeat(2,1fr)}.finance{grid-template-columns:repeat(2,1fr)}.case{grid-template-columns:58px 1fr}.caseState{display:none}.nav{flex:1}.hero{padding-top:40px}.sectionHead{display:block}.sectionHead small{display:block;margin-top:4px}}
 .finance{grid-template-columns:repeat(4,1fr)}#financeTop .money:nth-child(1){border-top:3px solid var(--green)}#financeTop .money:nth-child(2){border-top:3px solid var(--blue)}#financeTop .money:nth-child(3){border-top:3px solid var(--red)}#financeTop .money:nth-child(4),#financeTop .money:nth-child(5){border-top:3px solid var(--violet)}.sectionHead h2{background:linear-gradient(90deg,var(--ink),#344054);-webkit-background-clip:text;background-clip:text;color:transparent}.sectionHead small{font-weight:650}.caseState .tag{margin-bottom:3px}.section,.stat,.money,.case,.chip{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease}@media(max-width:700px){.finance{grid-template-columns:repeat(2,1fr)}}
 </style>
-<style>.financeExplain{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:16px;padding:18px;border:1px solid rgba(100,120,180,.25);border-radius:18px;background:rgba(255,255,255,.04)}.financeExplain h3{margin:0 0 8px}.financeExplain p{line-height:1.5}.debtRows{display:grid;gap:9px;margin-top:14px}.debtRow{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px;padding:9px 0}.debtRow i{grid-column:1/3;height:7px;border-radius:8px;background:linear-gradient(90deg,#69a7ff,#9b7cff);display:block}.financeExplain small{opacity:.75}@media(max-width:700px){.financeExplain{grid-template-columns:1fr}}</style></head>
+<style>.financeExplain{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:16px;padding:18px;border:1px solid rgba(100,120,180,.25);border-radius:18px;background:rgba(255,255,255,.04)}.financeExplain h3{margin:0 0 8px}.financeExplain p{line-height:1.5}.debtRows{display:grid;gap:9px;margin-top:14px}.debtRow{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px;padding:9px 0}.debtRow i{grid-column:1/3;height:7px;border-radius:8px;background:linear-gradient(90deg,#69a7ff,#9b7cff);display:block}.financeExplain small{opacity:.75}@media(max-width:700px){.financeExplain{grid-template-columns:1fr}}</style><style>
+.financeSimple{margin-top:12px}.financeHero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:26px;border-radius:22px;background:linear-gradient(135deg,rgba(72,93,180,.22),rgba(61,185,210,.12));border:1px solid rgba(120,140,220,.22)}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.7}.financeBig{font-size:clamp(2.5rem,7vw,5.2rem);font-weight:800;line-height:1;margin:10px 0}.financeHero p{max-width:650px;opacity:.78}.perCap{padding:18px 22px;border-radius:16px;background:rgba(0,0,0,.12);text-align:right}.perCap strong{display:block;font-size:1.8rem}.perCap span{font-size:.8rem;opacity:.7}.financeSwitch{display:flex;gap:8px;margin:14px 0}.finTab{border:0;border-radius:999px;padding:10px 16px;background:rgba(120,140,180,.12);color:inherit;cursor:pointer}.finTab.active{background:#6d78e8;color:#fff}.finGrid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}.finPart{margin:14px 0}.finPart>div:first-child{display:flex;justify-content:space-between}.finBar{height:10px;background:rgba(120,140,180,.13);border-radius:20px;overflow:hidden;margin-top:6px}.finBar i{display:block;height:100%;background:linear-gradient(90deg,#66a7ff,#9a7cf5);border-radius:20px}.finMini,.personView{display:grid;gap:10px;padding:18px;border-radius:18px;background:rgba(120,140,180,.08)}.finMini span,.personView span{font-size:.82rem;opacity:.68}.finMini b{font-size:1.25rem}.personView{grid-template-columns:repeat(3,1fr)}.personView div{padding:18px}.personView b{display:block;font-size:1.7rem}.trendView{display:grid;grid-template-columns:1fr 1.5fr;gap:18px;padding:20px;border-radius:18px;background:rgba(120,140,180,.08)}.trendNumber b{display:block;font-size:2.4rem}.trendNumber small{opacity:.7}.simpleFlow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}.finDetails{margin-top:14px;opacity:.85}.finDetails summary{cursor:pointer;font-weight:650}@media(max-width:700px){.financeHero,.finGrid,.trendView{grid-template-columns:1fr}.perCap{text-align:left}.personView{grid-template-columns:1fr}.financeSwitch{overflow:auto}}
+</style></head>
 <body>
 <header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#chronik">Politiker</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#lobby">Lobby</a><a href="#quellen">Quellen</a></div></nav></div></header>
 <main class="wrap">
@@ -85,32 +87,36 @@ function politicianEvents(){
  return out;
 }
 function renderFinance(){
- const s=FINANCE.state2025||{},d=FINANCE.debt2025||{},e=FINANCE.eu2025||{};
- const per=d.perCapitaEuro?Math.round(d.perCapitaEuro).toLocaleString("de-DE")+" €":"—";
- const pop=(d.publicDebtMrd&&d.perCapitaEuro)?(d.publicDebtMrd*1000000000/d.perCapitaEuro):0;
- const pc=v=>pop?(v*1000000000/pop).toLocaleString("de-DE",{maximumFractionDigits:0})+" €":"—";
- const cards=[
-  ["2.081 Mrd. €","Staatliche Einnahmen 2025"],
-  ["2.208 Mrd. €","Staatliche Ausgaben 2025"],
-  ["−127,3 Mrd. €","Finanzierungsdefizit 2025"],
-  [(d.publicDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Öffentliche Schulden"],
-  [per,"öffentliche Schulden pro Kopf"],
-  [pc(2080.742),"Einnahmen rechnerisch pro Einwohner"],
-  [pc(2208.034),"Ausgaben rechnerisch pro Einwohner"],
-  [pc(127.325),"Defizit rechnerisch pro Einwohner"],
-  [(d.bundDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden des Bundes"],
-  [(d.landDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden der Länder"],
-  [(e.debtRatioPct||0).toLocaleString("de-DE")+" %","Maastricht-Schuldenquote 2025"]
- ];
- document.getElementById("financeTop").innerHTML=cards.map(x=>'<div class="money"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join("");
- document.getElementById("financeNote").textContent="Pro-Kopf-Wert: "+per+". Die Einnahmen-, Ausgaben- und Defizitwerte pro Einwohner sind rechnerische Bezugsgrößen auf derselben Bevölkerungsbasis; sie sind keine individuellen Rechnungen oder persönlichen Schulden. Nationale Schuldenstatistik und Maastricht-Abgrenzung werden getrennt dargestellt. Quelle: Destatis.";
-}
-function renderFinanceExplain(){
  const host=document.getElementById("financeTop"); if(!host)return;
- const d=FINANCE.debtExplainer||{}, q=FINANCE.latest2026||{};
- const total=Number(d.totalMrd||FINANCE.debt2025?.publicDebtMrd||0);
- const rows=(d.breakdown||[]).map(x=>'<div class="debtRow"><span>'+esc(x.label)+'</span><b>'+Number(x.mrd).toLocaleString("de-DE")+' Mrd. €</b><i style="width:'+Math.min(100,Math.max(2,(Number(x.mrd)/total)*100))+'%"></i></div>').join("");
- host.insertAdjacentHTML("beforeend",'<div class="financeExplain"><div><h3>Schulden einfach erklärt</h3><p><b>'+Number(total).toLocaleString("de-DE")+' Mrd. €</b> öffentliche Schulden. Das sind statistisch <b>'+Number(d.perCapitaEuro||0).toLocaleString("de-DE")+' € pro Kopf</b> – nicht eine persönliche Rechnung.</p><div class="debtRows">'+rows+'</div></div><div><h3>Was passiert aktuell?</h3><p>Im 1. Halbjahr 2026 lag das gesamtstaatliche Finanzierungsdefizit bei <b>'+Number(q.publicDeficitH1Mrd||0).toLocaleString("de-DE")+' Mrd. €</b>, 36,6 Mrd. € mehr als im Vorjahreszeitraum.</p><p>Das öffentliche Finanzvermögen lag Ende 2025 bei <b>'+Number(q.publicFinancialAssetsMrd||0).toLocaleString("de-DE")+' Mrd. €</b>.</p><small>Schulden und Finanzvermögen sind unterschiedliche Größen und werden nicht miteinander verrechnet.</small></div></div>');
+ const s=FINANCE.state2025||{},d=FINANCE.debt2025||{},q=FINANCE.latest2026||{};
+ const fmt=n=>Number(n||0).toLocaleString("de-DE",{maximumFractionDigits:0});
+ const deficit=Math.abs(Number(s.deficitMrd||0));
+ host.innerHTML=`
+ <div class="financeSimple">
+  <div class="financeHero">
+   <div><span class="eyebrow">Öffentliche Schulden · Ende 2025</span><div class="financeBig">${fmt(d.publicDebtMrd)} Mrd. €</div><p>Das ist der gesamte Schuldenstand von Bund, Ländern, Gemeinden und weiteren öffentlichen Ebenen.</p></div>
+   <div class="perCap"><strong>${fmt(d.perCapitaEuro)} €</strong><span>statistisch pro Einwohner</span></div>
+  </div>
+  <div class="financeSwitch" role="tablist">
+   <button class="finTab active" data-view="state">Staat</button><button class="finTab" data-view="person">Pro Einwohner</button><button class="finTab" data-view="trend">Entwicklung</button>
+  </div>
+  <div id="finView"></div>
+  <details class="finDetails"><summary>Was bedeuten die Zahlen?</summary><p><b>Schulden</b> sind Verbindlichkeiten des Staates. <b>Defizit</b> ist das Minus eines Jahres. Beides ist nicht dasselbe.</p><p>Die Pro-Kopf-Zahl ist eine Rechengröße zur Einordnung und keine persönliche Rechnung.</p></details>
+ </div>`;
+ const view=document.getElementById("finView");
+ const renderView=v=>{
+  document.querySelectorAll(".finTab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  if(v==="state"){
+   const total=Number(d.publicDebtMrd||0), parts=[["Bund",d.bundDebtMrd||0],["Länder",d.landDebtMrd||0],["Gemeinden / weitere",Math.max(0,total-(d.bundDebtMrd||0)-(d.landDebtMrd||0))]];
+   view.innerHTML='<div class="finGrid"><div><h3>Wo liegen die Schulden?</h3>'+parts.map(p=>'<div class="finPart"><div><span>'+p[0]+'</span><b>'+fmt(p[1])+' Mrd. €</b></div><div class="finBar"><i style="width:'+Math.min(100,p[1]/total*100)+'%"></i></div></div>').join('')+'</div><div class="finMini"><span>Einnahmen 2025</span><b>'+fmt(s.revenueMrd)+' Mrd. €</b><span>Ausgaben 2025</span><b>'+fmt(s.spendingMrd)+' Mrd. €</b><span>Jahresdefizit 2025</span><b>−'+fmt(deficit)+' Mrd. €</b></div></div>';
+  }else if(v==="person"){
+   view.innerHTML='<div class="personView"><div><b>'+fmt(d.perCapitaEuro)+' €</b><span>Schulden statistisch pro Einwohner</span></div><div><b>'+fmt(Number(s.revenueMrd)*1e9/84.3e6)+' €</b><span>Staatseinnahmen 2025 pro Einwohner, rechnerisch</span></div><div><b>'+fmt(Number(s.spendingMrd)*1e9/84.3e6)+' €</b><span>Staatsausgaben 2025 pro Einwohner, rechnerisch</span></div></div>';
+  }else{
+   view.innerHTML='<div class="trendView"><div class="trendNumber"><span>Defizit 1. Halbjahr 2026</span><b>'+fmt(q.publicDeficitH1Mrd)+' Mrd. €</b><small>+'+fmt(q.publicDeficitH1ChangeMrd)+' Mrd. € gegenüber H1 2025</small></div><div><p><b>Wichtig:</b> Das ist der aktuelle Jahresfluss, nicht die gesamte Staatsschuld.</p><div class="simpleFlow"><span>Schuldenbestand</span><strong>→</strong><span>jährliches Defizit / Überschuss</span><strong>→</strong><span>neuer Schuldenstand</span></div></div></div>';
+  }
+ };
+ renderView("state");
+ document.querySelectorAll(".finTab").forEach(b=>b.addEventListener("click",()=>renderView(b.dataset.view)));
 }
 function renderLobby(){
  const s=LOBBY.stats||{},t=LOBBY.tracked||[];
