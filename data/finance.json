@@ -29,5 +29,37 @@
     "Pro-Kopf-Werte sind statistische Bezugsgrößen und keine individuellen Rechnungen.",
     "Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt.",
     "Nur belegte Kosten werden als Kosten aggregiert; geplante oder potenzielle Ausgaben bleiben getrennt."
-  ]
+  ],
+  "latest2026": {
+    "publicDeficitH1Mrd": 71.3,
+    "publicDeficitH1PreviousMrd": 34.7,
+    "publicDeficitH1ChangeMrd": 36.6,
+    "publicDeficitRatioPct": 3.1,
+    "publicFinancialAssetsMrd": 1199.1,
+    "publicFinancialAssetsChangePct": 5.9,
+    "federalFinancialAssetsMrd": 457.2,
+    "debtQ4_2025Mrd": 2726,
+    "debtPerCapitaEuro": 31887,
+    "source": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/08/PD26_305_813.html",
+    "assetsSource": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_335_71411.html"
+  },
+  "debtExplainer": {
+    "totalMrd": 2726,
+    "perCapitaEuro": 31887,
+    "simple": "Die 2.726 Mrd. € sind öffentliche Schulden gegenüber dem nicht-öffentlichen Bereich. Die 31.887 € pro Kopf sind eine statistische Umrechnung – keine Rechnung, die jeder Bürger bezahlen muss.",
+    "breakdown": [
+      {
+        "label": "Bund",
+        "mrd": 1885
+      },
+      {
+        "label": "Länder",
+        "mrd": 642
+      },
+      {
+        "label": "Rest / Gemeinden & weitere",
+        "mrd": 199
+      }
+    ]
+  }
 }
