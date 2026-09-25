@@ -2,5 +2,54 @@
   "version": 1,
   "updatedAt": "2026-09-25",
   "description": "Nachprüfbare politische Aussagen mit Datum, Kontext und Primärquelle. Aussagen werden nicht automatisch als falsch oder irreführend klassifiziert.",
-  "items": []
+  "items": [
+    {
+      "id": "statement-spahn-surrogacy-2026-07",
+      "personId": "jens-spahn",
+      "name": "Jens Spahn",
+      "date": "2026-07-17",
+      "context": "Erklärung zur Entscheidung für eine Leihmutterschaft in den USA",
+      "quote": "Ich bin lange zerrissen gewesen.",
+      "description": "Spahn erklärte, er habe lange mit dem Thema gerungen und seine Haltung im Laufe dieses Prozesses verändert.",
+      "source": "https://www.tagesschau.de/inland/spahn-cdu-leihmutterschaft-reaktionen-100.html",
+      "sourceName": "Tagesschau",
+      "reviewState": "reviewed"
+    },
+    {
+      "id": "statement-spahn-surrogacy-correction-2026-09",
+      "personId": "jens-spahn",
+      "name": "Jens Spahn",
+      "date": "2026-09-10",
+      "context": "Brief an CDU-Mitglieder im Wahlkreis Steinfurt/Borken",
+      "quote": "Ich war zu feige, bei diesem sensiblen Thema offen Farbe zu bekennen.",
+      "description": "Spahn erklärte, er habe seinen veränderten Standpunkt und den Abwägungsprozess nicht rechtzeitig offengelegt, um eine schwierige Debatte zu vermeiden.",
+      "source": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/spahn-brief-mitglieder-100.html",
+      "sourceName": "Tagesschau",
+      "reviewState": "reviewed"
+    },
+    {
+      "id": "statement-merz-summerinterview-arbeitszeit-2026",
+      "personId": "friedrich-merz",
+      "name": "Friedrich Merz",
+      "date": "2026-07-19",
+      "context": "ZDF-Sommerinterview",
+      "quote": "Die Schweizer arbeiten 200 Stunden mehr als die Deutschen.",
+      "description": "Das ZDF ordnete die Zahl anhand von Arbeitszeitstatistiken ein und wies darauf hin, dass der Vergleich insbesondere durch unterschiedliche Teilzeitquoten und weitere statistische Faktoren beeinflusst wird.",
+      "source": "https://www.zdfheute.de/politik/deutschland/sommerinterview-kanzler-merz-aussagen-faktencheck-100.html",
+      "sourceName": "ZDF",
+      "reviewState": "reviewed"
+    },
+    {
+      "id": "statement-merz-summerinterview-startups-2026",
+      "personId": "friedrich-merz",
+      "name": "Friedrich Merz",
+      "date": "2026-07-19",
+      "context": "ZDF-Sommerinterview",
+      "quote": "Wir haben eine Zahl von Unternehmensgründungen durch junge Menschen in nie gekannter Zahl.",
+      "description": "Das ZDF prüfte die Aussage anhand der Startup-Zahlen und weiterer Gründungsstatistiken und stellte den unterschiedlichen Bezugsrahmen heraus.",
+      "source": "https://www.zdfheute.de/politik/deutschland/sommerinterview-kanzler-merz-aussagen-faktencheck-100.html",
+      "sourceName": "ZDF",
+      "reviewState": "reviewed"
+    }
+  ]
 }
