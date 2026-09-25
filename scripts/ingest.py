@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCES=ROOT/"data/sources.json"
 INBOX=ROOT/"data/inbox.json"
 UA="PULSE-DE/1.0 (+https://github.com/Rololol/Pulse-Headmap)"
-KEYWORDS=re.compile(r"schaden|mehrkosten|fehlbetrag|fehlinvestition|korruption|vergab|aufsicht|rückforderung|steuerausfall|untersuchung|rechnungshof|haushalt|subvention|beschaffung|klage|urteil|entscheidung|gesetz",re.I)
+KEYWORDS=re.compile(r"schaden|mehrkosten|fehlbetrag|fehlinvestition|korruption|vergab|aufsicht|rückforderung|steuerausfall|untersuchung|rechnungshof|haushalt|subvention|beschaffung|klage|urteil|entscheidung|beschluss|verfassungsbeschwer|gesetz|kosten|finanz|schuld|vorteilsannahme|pflichtverletzung",re.I)
 
 class LinkParser(HTMLParser):
     def __init__(self):
@@ -50,7 +50,8 @@ def html_items(raw,source,base):
         if len(title)<8: continue
         url=absolute(base,href)
         if source["scope"]=="berichte" and "/veroeffentlichungen/" not in url: continue
-        if source["scope"]=="pressemitteilungen" and not (KEYWORDS.search(title) or "presse" in title.lower()): continue
+        if source["scope"] in ("pressemitteilungen","presse") and not (KEYWORDS.search(title) or "entscheidung" in title.lower() or "urteil" in title.lower() or "beschluss" in title.lower()): continue
+        if source["scope"] in ("finanzen","schulden") and not (KEYWORDS.search(title)): continue
         out.append(record(source,title,url))
     return out
 
@@ -63,7 +64,7 @@ def main():
         try:
             raw=fetch(source["url"])
             items=rss_items(raw,source) if source["type"]=="rss" else html_items(raw,source,source["url"])
-            items=sorted(items,key=lambda x:(not x["matched"],x["title"]))[:120]
+            items=sorted(items,key=lambda x:(not x["matched"],x["title"]))[:200]
             for item in items:
                 if item["url"] not in known:
                     inbox["items"].append(item); known.add(item["url"]); added.append(item)
