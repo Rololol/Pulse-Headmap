@@ -574,5 +574,22 @@
     "updated": "2026-09-25",
     "confidence": "hoch",
     "editorialLabel": "Gerichtliche Verurteilung"
+  },
+  {
+    "id": "fischer-aserbaidschan",
+    "title": "Axel Fischer: Verurteilung wegen Bestechlichkeit",
+    "year": "2026",
+    "date": "2026-01-22",
+    "category": "Gericht / Korruption",
+    "party": "CDU",
+    "people": "Axel Fischer",
+    "status": "Verurteilt · Rechtsmittelstatus prüfen",
+    "sourceName": "Gericht / Medienquelle",
+    "source": "https://www.justiz.bayern.de/gerichte-und-behoerden/oberlandesgerichte/muenchen/presse/2026/6.php",
+    "summary": "Das OLG München verurteilte den ehemaligen Bundestagsabgeordneten Axel Fischer wegen Bestechlichkeit von Mandatsträgern.",
+    "detail": "Verurteilung zu einer Bewährungsstrafe; Rechtsmittelstatus gesondert prüfen.",
+    "updated": "2026-09-25",
+    "confidence": "hoch",
+    "editorialLabel": "Gerichtliche Verurteilung"
   }
 ]
