@@ -15,5 +15,66 @@
     "Ermittlung/Untersuchung",
     "Sonstiges"
   ],
-  "items": []
+  "items": [
+    {
+      "id": "conduct-spahn-surrogacy-position-change-2026",
+      "personId": "jens-spahn",
+      "name": "Jens Spahn",
+      "date": "2026-07",
+      "category": "Widerspruch",
+      "title": "Frühere skeptische Haltung zur Leihmutterschaft und spätere persönliche Entscheidung",
+      "description": "Öffentlich dokumentiert ist eine frühere skeptische bzw. ablehnende Haltung Spahns zur Legalisierung der Leihmutterschaft. Im Juli 2026 wurde bekannt, dass er und sein Mann über eine Leihmutter in den USA Eltern geworden waren. Spahn erklärte später, seine Haltung habe sich über einen längeren Abwägungsprozess verändert. Der Widerspruch zwischen früherer öffentlicher Haltung und persönlicher Entscheidung wurde von Spahn selbst im September 2026 ausdrücklich eingeräumt.",
+      "sources": [
+        {
+          "url": "https://www.tagesschau.de/inland/innenpolitik/spahn-ruecktritt-108.html",
+          "title": "Tagesschau: Was der Spahn-Rücktritt für die CDU bedeutet"
+        },
+        {
+          "url": "https://www.tagesschau.de/inland/innenpolitik/leihmutterschaft-spahn-cdu-100.html",
+          "title": "Tagesschau: Spahn als Vater – Diskussion über Leihmutterschaft"
+        },
+        {
+          "url": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/spahn-brief-mitglieder-100.html",
+          "title": "Tagesschau: Spahn entschuldigt sich bei CDU-Mitgliedern"
+        }
+      ],
+      "reviewState": "reviewed"
+    },
+    {
+      "id": "conduct-spahn-surrogacy-correction-2026",
+      "personId": "jens-spahn",
+      "name": "Jens Spahn",
+      "date": "2026-09-10",
+      "category": "Rücknahme/Korrektur",
+      "title": "Spahn räumt verspätete Offenlegung seiner veränderten Position ein",
+      "description": "In einem Brief an CDU-Mitglieder seines Wahlkreises erklärte Spahn, er habe es versäumt, seinen Abwägungsprozess und seine veränderte Position zur Leihmutterschaft rechtzeitig offenzulegen. Er bezeichnete den Umgang damit als falsch und bat um Entschuldigung.",
+      "sources": [
+        {
+          "url": "https://www.tagesschau.de/inland/regional/nordrheinwestfalen/spahn-brief-mitglieder-100.html",
+          "title": "Tagesschau: Spahn entschuldigt sich – Ich war zu feige"
+        },
+        {
+          "url": "https://www.tagesspiegel.de/politik/ich-war-zu-feige-spahn-entschuldigt-sich-nach-leihmutterschaftsaffare-bei-cdu-mitgliedern-16038830.html",
+          "title": "Tagesspiegel: Spahn entschuldigt sich nach Leihmutterschaftsaffäre"
+        }
+      ],
+      "reviewState": "reviewed"
+    },
+    {
+      "id": "conduct-merz-summer-factcheck-2026",
+      "personId": "friedrich-merz",
+      "name": "Friedrich Merz",
+      "date": "2026-07-19",
+      "category": "Sonstiges",
+      "title": "ZDF-Faktencheck zu Aussagen im Sommerinterview",
+      "description": "Das ZDF prüfte mehrere Aussagen von Friedrich Merz im Sommerinterview. Dabei wurden unter anderem Aussagen zur Arbeitszeit in der Schweiz, zu Unternehmensgründungen und zum Frauenanteil in der CDU mit statistischem Kontext versehen. PULSE übernimmt die journalistische Einordnung nicht als eigene Bewertung, sondern dokumentiert die Aussage und die veröffentlichte Prüfung.",
+      "sources": [
+        {
+          "url": "https://www.zdfheute.de/politik/deutschland/sommerinterview-kanzler-merz-aussagen-faktencheck-100.html",
+          "title": "ZDF: Faktencheck zum ZDF-Sommerinterview mit Bundeskanzler Merz"
+        }
+      ],
+      "reviewState": "reviewed"
+    }
+  ]
 }
