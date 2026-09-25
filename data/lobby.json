@@ -26,14 +26,11 @@
     }
   ],
   "stats": {
-    "totalEntries": 30265,
-    "entriesWithRevolvingDoorInfo": 969,
-    "currentOrLastFiveYears": {
-      "federalGovernment": 3,
-      "parliamentaryStateSecretary": 6,
-      "bundestagMember": 181,
-      "federalAdministration": 265
-    }
+    "activeEntries": 6316,
+    "previousEntries": 672,
+    "flaggedNotUpdated": 435,
+    "codeOfConductViolations": 1,
+    "combinedFlagged": 436
   },
   "tracked": [
     {
@@ -68,6 +65,17 @@
       "source": "https://www.zdfheute.de/politik/deutschland/wissing-lobbyismus-hvo-kampagne-mobil-in-deutschland-100.html",
       "sourceName": "ZDF",
       "status": "Prüfverfahren"
+    },
+    {
+      "id": "lobby-register-verstoss-gesamt",
+      "person": "Lobbyregister / registerführende Stelle",
+      "type": "Verhaltenskodex / Aktualisierung",
+      "date": "2026-09-25",
+      "title": "Öffentlich ausgewiesene Registervermerke",
+      "description": "Das offizielle Register weist aktuell 435 Einträge als nicht aktualisiert und 1 Eintrag mit festgestelltem Verstoß gegen den Verhaltenskodex aus. Diese Zahlen betreffen Registerstatus und sind keine Aussage über politische Einflussnahme.",
+      "source": "https://www.lobbyregister.bundestag.de/startseite",
+      "sourceName": "Deutscher Bundestag – Lobbyregister",
+      "status": "Registerstatistik"
     }
   ]
 }
