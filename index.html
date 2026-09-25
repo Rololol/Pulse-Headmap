@@ -61,7 +61,7 @@ footer{padding:42px 0 70px;color:var(--muted);font-size:10px;line-height:1.6}
 <input id="q" class="input" placeholder="Suche: Vorgang, Person, Behörde, Partei …">
 <select id="category" class="select"><option value="">Alle Themen</option></select>
 <select id="status" class="select"><option value="">Alle Status</option></select>
-<select id="party" class="select"><option value="">Alle Zuordnungen</option></select>
+<select id="party" class="select"><option value="">Alle Zuordnungen</option></select><select id="wp" class="select"><option value="">Alle Wahlperioden</option><option value="21">21. WP · 2025–</option><option value="20">20. WP · 2021–2025</option><option value="19">19. WP · 2017–2021</option><option value="18">18. WP · 2013–2017</option><option value="17">17. WP · 2009–2013</option><option value="16">16. WP · 2005–2009</option><option value="15">15. WP · 2002–2005</option><option value="14">14. WP · 1998–2002</option><option value="13">13. WP · 1994–1998</option><option value="12">12. WP · 1990–1994</option></select>
 <select id="costtype" class="select"><option value="">Alle Kostenarten</option></select><select id="sort" class="select"><option value="new">Neueste zuerst</option><option value="old">Älteste zuerst</option><option value="alpha">Alphabetisch</option></select>
 </div>
 <div class="filterline" id="chips"></div>
@@ -105,15 +105,16 @@ const cats=[...new Set(DATA.map(x=>x.category))].sort(), sts=[...new Set(DATA.ma
 document.querySelector('#category').innerHTML+='<option>'+cats.map(esc).join('</option><option>')+'</option>';
 document.querySelector('#status').innerHTML+='<option>'+sts.map(esc).join('</option><option>')+'</option>';
 document.querySelector('#party').innerHTML+='<option>'+parties.map(esc).join('</option><option>')+'</option>';document.querySelector('#costtype').innerHTML+='<option>'+costtypes.map(esc).join('</option><option>')+'</option>';
-['q','category','status','party','costtype','sort'].forEach(id=>document.querySelector('#'+id).addEventListener('input',render));
+['q','category','status','party','costtype','wp','sort'].forEach(id=>document.querySelector('#'+id).addEventListener('input',render));
 }
 function filtered(){
-let q=document.querySelector('#q').value.trim().toLowerCase(),c=document.querySelector('#category').value,s=document.querySelector('#status').value,p=document.querySelector('#party').value,ct=document.querySelector('#costtype').value,sort=document.querySelector('#sort').value;
-let a=DATA.filter(x=>(!q||[x.title,x.summary,x.party,x.people,x.agency,x.category,x.status].join(' ').toLowerCase().includes(q))&&(!c||x.category===c)&&(!s||x.status===s)&&(!p||x.party===p)&&(!ct||x.costType===ct));
+let q=document.querySelector('#q').value.trim().toLowerCase(),c=document.querySelector('#category').value,s=document.querySelector('#status').value,p=document.querySelector('#party').value,ct=document.querySelector('#costtype').value,wpv=document.querySelector('#wp').value,sort=document.querySelector('#sort').value;
+let a=DATA.filter(x=>(!q||[x.title,x.summary,x.party,x.people,x.agency,x.category,x.status].join(' ').toLowerCase().includes(q))&&(!c||x.category===c)&&(!s||x.status===s)&&(!p||x.party===p)&&(!ct||x.costType===ct)&&(!wpv||String(wp(x))===wpv));
 return a.sort((a,b)=>sort==='alpha'?a.title.localeCompare(b.title,'de'):sort==='old'?ym(a).localeCompare(ym(b)):ym(b).localeCompare(ym(a)));
 }
 function updateQuick(){document.querySelector('#qAll').textContent=DATA.length;document.querySelector('#qNumeric').textContent=DATA.filter(x=>/€[0-9]/.test(x.costDisplay||'')).length;document.querySelector('#q2026').textContent=DATA.filter(x=>String(x.updated||'').startsWith('2026')).length;document.querySelector('#qOpen').textContent=DATA.filter(x=>!/€[0-9]/.test(x.costDisplay||'')).length}
-function clearFilters(){['q','category','status','party','costtype'].forEach(id=>document.querySelector('#'+id).value='');render()}
+function wp(x){const y=parseInt(String(x.year||x.eventDate||'').slice(0,4),10);if(!y)return 0;if(y>=2025)return 21;if(y>=2021)return 20;if(y>=2017)return 19;if(y>=2013)return 18;if(y>=2009)return 17;if(y>=2005)return 16;if(y>=2002)return 15;if(y>=1998)return 14;if(y>=1994)return 13;if(y>=1990)return 12;if(y>=1987)return 11;if(y>=1983)return 10;if(y>=1980)return 9;if(y>=1976)return 8;if(y>=1972)return 7;if(y>=1969)return 6;return 0}
+function clearFilters(){['q','category','status','party','costtype','wp'].forEach(id=>document.querySelector('#'+id).value='');render()}
 function showNumeric(){document.querySelector('#q').value='€';document.querySelector('#faelle').scrollIntoView({behavior:'smooth'});render()}
 function show2026(){document.querySelector('#q').value='2026';document.querySelector('#faelle').scrollIntoView({behavior:'smooth'});render()}
 function showNoCost(){document.querySelector('#q').value='nicht beziffert';document.querySelector('#faelle').scrollIntoView({behavior:'smooth'});render()}
