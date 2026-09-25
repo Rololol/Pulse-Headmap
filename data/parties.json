@@ -1,0 +1,10 @@
+[
+{"id":"cducsu","name":"CDU/CSU","currentBundestagSeats":208},
+{"id":"afd","name":"AfD","currentBundestagSeats":152},
+{"id":"spd","name":"SPD","currentBundestagSeats":120},
+{"id":"gruene","name":"Bündnis 90/Die Grünen","currentBundestagSeats":85},
+{"id":"linke","name":"Die Linke","currentBundestagSeats":64},
+{"id":"ssw","name":"SSW","currentBundestagSeats":1},
+{"id":"fdp","name":"FDP","currentBundestagSeats":0},
+{"id":"bsw","name":"BSW","currentBundestagSeats":0}
+]
