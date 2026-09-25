@@ -591,5 +591,22 @@
     "updated": "2026-09-25",
     "confidence": "hoch",
     "editorialLabel": "Gerichtliche Verurteilung"
+  },
+  {
+    "id": "lintner-aserbaidschan",
+    "title": "Eduard Lintner: Bestechung von Mandatsträgern",
+    "year": "2025",
+    "date": "2025-07-30",
+    "category": "Gericht / Korruption",
+    "party": "CSU",
+    "people": "Eduard Lintner / Karin Strenz",
+    "status": "Verurteilt · Rechtsmittelstatus prüfen",
+    "sourceName": "Gericht / Medienquelle",
+    "source": "https://www.bayern.verfassungsgerichtshof.de/gerichte-und-behoerden/oberlandesgerichte/muenchen/presse/2025/49.php",
+    "summary": "Das OLG München verurteilte den ehemaligen Bundestagsabgeordneten Eduard Lintner wegen Bestechung von Mandatsträgern im Aserbaidschan-Komplex.",
+    "detail": "9 Monate Freiheitsstrafe auf Bewährung; Einziehung von 111.330 Euro beim Erben der verstorbenen Abgeordneten Karin Strenz.",
+    "updated": "2026-09-25",
+    "confidence": "hoch",
+    "editorialLabel": "Gerichtliche Verurteilung"
   }
 ]
