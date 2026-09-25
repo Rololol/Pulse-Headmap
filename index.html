@@ -24,9 +24,10 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 </style>
 </head>
 <body>
-<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#aussagen">Aussagen</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#quellen">Quellen</a></div></nav></div></header>
+<header><div class="wrap"><nav><div class="brand">PULSE<i>·DE</i></div><div class="nav"><a href="#parteien">Parteien</a><a href="#vorgaenge">Vorgänge</a><a href="#chronik">Politiker</a><a href="#personen">Personen</a><a href="#finanzen">Finanzen</a><a href="#quellen">Quellen</a></div></nav></div></header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">Transparenzregister · Stand 25.09.2026</div><h1>Deutschland.<br><span>belegt.</span></h1><p class="lead">Politische Vorgänge, Aussagen, Widersprüche, Ermittlungen, Gerichtsentscheidungen und öffentliche Kosten — in einer einzigen, durchsuchbaren Oberfläche. Jeder Eintrag soll auf eine nachvollziehbare Quelle zurückführen.</p><div class="updated">Daten werden laufend aus offiziellen Veröffentlichungen und geprüften Quellen ergänzt.</div></section>
+<section class="hero"><div class="eyebrow">Transparenzregister · Stand 25.09.2026</div><h1>Deutschland.<br><span>belegt.</span></h1><p class="lead">Staatsfinanzen zuerst. Danach dokumentierte Vorgänge und eine chronologische Politiker-Ansicht für Aussagen, Entscheidungen, Abstimmungen, Positionsänderungen, Korrekturen und Verfahren. Jeder Eintrag führt zu einer nachvollziehbaren Quelle.</p><div class="updated">Daten werden laufend aus offiziellen Veröffentlichungen und geprüften Quellen ergänzt.</div></section>
+<section class="section" id="finanzen"><div class="sectionHead"><h2>Staat & Finanzen</h2><small>amtliche Datenstände · zuerst im Überblick</small></div><div class="finance" id="financeTop"></div><div class="note" id="financeNote">Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt. Pro-Kopf-Werte sind statistische Bezugsgrößen und keine individuelle Schuld. Quelle: Destatis.</div></section>
 <section class="overview" id="overview"><div class="stat"><b id="nCases">—</b><span>dokumentierte Vorgänge</span></div><div class="stat"><b id="nParties">—</b><span>Parteien mit Datensätzen</span></div><div class="stat"><b id="nStatements">—</b><span>Aussagen / Prüfungen</span></div><div class="stat"><b id="nDecisions">—</b><span>Entscheidungen / Verfahren</span></div></section>
 <div class="searchbox"><input id="search" placeholder="Alles durchsuchen: Partei, Person, Vorgang, Aussage, Behörde …"></div>
 
@@ -34,28 +35,29 @@ footer{padding:25px 0 45px;color:var(--muted);font-size:8px}
 
 <section class="section" id="vorgaenge"><div class="sectionHead"><h2>Vorgänge</h2><small id="caseCount">—</small></div><div class="controls" id="typeChips"><button class="chip active" data-type="">Alle</button><button class="chip" data-type="Aussage">Aussagen</button><button class="chip" data-type="Entscheidung">Entscheidungen</button><button class="chip" data-type="Ermittlung">Ermittlungen</button><button class="chip" data-type="Kosten">Kosten</button><button class="chip" data-type="Widerspruch">Widerspruch</button></div><div class="cases" id="caseList"></div></section>
 
-<section class="section" id="aussagen"><div class="sectionHead"><h2>Aussagen & Widersprüche</h2><small>Behauptung, Gegenquelle, Prüfung und Status getrennt</small></div><div class="tableWrap"><table class="table"><thead><tr><th>Person</th><th>Aussage / Vorgang</th><th>Status</th></tr></thead><tbody id="statementTable"></tbody></table></div><div class="note">„Falsch“, „irreführend“, „nicht belegt“ und „umstritten“ sind unterschiedliche Sachverhalte. PULSE übernimmt nur dokumentierte Bewertungen und kennzeichnet deren Quelle.</div></section>
+<section class="section" id="chronik"><div class="sectionHead"><h2>Politiker: Aussagen · Entscheidungen · Handlungen</h2><small>chronologisch · Person auswählen · Ereignisse miteinander verknüpfen</small></div><div class="controls" id="eventTypeChips"><button class="chip active" data-event-type="">Alle</button><button class="chip" data-event-type="Aussage">Aussagen</button><button class="chip" data-event-type="Entscheidung">Entscheidungen</button><button class="chip" data-event-type="Abstimmung">Abstimmungen</button><button class="chip" data-event-type="Positionsänderung">Positionen</button><button class="chip" data-event-type="Korrektur">Korrekturen</button><button class="chip" data-event-type="Verfahren">Verfahren</button></div><div class="controls" id="eventPeople"></div><div class="cases" id="eventList"></div><div class="note">Die Chronik beschreibt dokumentierte Ereignisse. Eine spätere Aussage oder Entscheidung wird nicht automatisch als „Widerspruch“ bewertet; Beziehungen zwischen Ereignissen werden nur ausgewiesen, wenn sie belegt sind.</div></section>
 
 <section class="section" id="personen"><div class="sectionHead"><h2>Politiker & Transparenzprofil</h2><small>Ämter · Nebentätigkeiten · Einkünfte · Lobbykontakte · Abstimmungen · Verfahren</small></div><div class="controls" id="personChips"></div><div class="tableWrap"><table class="table"><thead><tr><th>Person</th><th>Partei / Funktion</th><th>Transparenzdaten</th><th>Vorgänge</th></tr></thead><tbody id="personTable"></tbody></table></div><div class="note">Erfasst werden nur öffentlich dokumentierte und belegbare Angaben. Nebentätigkeit oder Kontakt zu Interessenvertretern ist für sich genommen keine Pflichtverletzung. Bei Verfahren, Vorwürfen und Entscheidungen wird der jeweilige Status getrennt ausgewiesen.</div></section>
 
-<section class="section" id="finanzen"><div class="sectionHead"><h2>Staat & Finanzen</h2><small>amtliche Datenstände getrennt nach Abgrenzung</small></div><div class="finance"><div class="money"><b>2.081 Mrd. €</b><span>Staatliche Einnahmen 2025</span></div><div class="money"><b>2.208 Mrd. €</b><span>Staatliche Ausgaben 2025</span></div><div class="money"><b>−127,3 Mrd. €</b><span>Finanzierungsdefizit 2025</span></div><div class="money"><b>2.726 Mrd. €</b><span>öffentliche Schulden · aktueller Datenstand</span></div></div><div class="note">Nationale Schuldenstatistik und Maastricht-Abgrenzung werden nicht vermischt. Pro-Kopf-Werte sind statistische Bezugsgrößen, keine individuelle Schuld. Quelle: Destatis.</div></section>
+
 
 <section class="section" id="quellen"><div class="sectionHead"><h2>Quellen & Prüfstand</h2><small>Originaldokumente zuerst</small></div><div class="tableWrap"><table class="table"><tbody id="sourceTable"></tbody></table></div><div class="note">Neue amtliche Veröffentlichungen landen zunächst in der Prüf-Inbox. Ein automatischer Treffer wird nicht als Fehlverhalten veröffentlicht.</div></section>
 </main>
 <footer><div class="wrap">PULSE·DE · Transparenz- und Dokumentationssystem · Datenstand 25.09.2026</div></footer>
 <div class="drawer" id="drawer"><div class="panel"><button class="close" id="close">×</button><div id="detail"></div></div></div>
 <script>
-let DATA=[],STATEMENTS=[],CONDUCT=[],INBOX=[],FINANCE={},activeParty="",activeType="";
+let DATA=[],STATEMENTS=[],CONDUCT=[],INBOX=[],FINANCE={},activeParty="",activeType="",activeEventType="",activePerson="";
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const txt=x=>[x.title,x.summary,x.party,x.people,x.agency,x.category,x.status,x.statement,x.quote].join(" ").toLowerCase();
+const txt=x=>[x.title,x.summary,x.party,x.people,x.agency,x.category,x.status,x.statement,x.quote,x.description,x.name,x.person,x.type].join(" ").toLowerCase();
 async function json(p,d){try{return await fetch(p+"?v=20260925",{cache:"no-store"}).then(r=>r.json())}catch(e){return d}}
 async function init(){
 DATA=await json("data.json",[]);let s=await json("data/statements.json",{items:[]}),c=await json("data/conduct.json",{items:[]}),i=await json("data/inbox.json",{items:[]}),f=await json("data/finance.json",{});
 STATEMENTS=s.items||[];CONDUCT=c.items||[];INBOX=i.items||[];FINANCE=f||{};
 const parties=[...new Set(DATA.map(x=>x.party).filter(Boolean))];document.getElementById("nCases").textContent=DATA.length.toLocaleString("de-DE");document.getElementById("nParties").textContent=parties.length;document.getElementById("nStatements").textContent=STATEMENTS.length+CONDUCT.length;document.getElementById("nDecisions").textContent=DATA.filter(x=>/entscheidung|gericht|urteil/i.test(txt(x))).length;
-renderParties(parties);renderCases();renderStatements();renderPeople();renderSources();
-document.getElementById("search").addEventListener("input",()=>{renderParties(parties);renderCases();renderStatements()});
+renderFinance();renderParties(parties);renderCases();renderPoliticianChronicle();renderPeople();renderSources();
+document.getElementById("search").addEventListener("input",()=>{renderParties(parties);renderCases();renderPoliticianChronicle();renderPeople()});
 document.querySelectorAll("#typeChips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#typeChips .chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeType=b.dataset.type;renderCases()});
+document.querySelectorAll("#eventTypeChips .chip").forEach(b=>b.onclick=()=>{document.querySelectorAll("#eventTypeChips .chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeEventType=b.dataset.eventType;renderPoliticianChronicle()});
 }
 function partyData(p){let d=DATA.filter(x=>x.party===p);let st=STATEMENTS.filter(x=>txt(x).includes(p.toLowerCase())).length+CONDUCT.filter(x=>txt(x).includes(p.toLowerCase())).length;let dec=d.filter(x=>/entscheidung|gericht|urteil/i.test(txt(x))).length;return[d.length,st,dec]}
 function renderParties(parties){
@@ -69,6 +71,51 @@ function renderCases(){
 let q=document.getElementById("search").value.toLowerCase().trim(),a=DATA.filter(x=>(!activeParty||x.party===activeParty)&&(!q||txt(x).includes(q))&&(!activeType||new RegExp(activeType,"i").test(txt(x)))).sort((a,b)=>String(b.date||b.year).localeCompare(String(a.date||a.year)));
 document.getElementById("caseCount").textContent=a.length+" Treffer";document.getElementById("caseList").innerHTML=a.slice(0,80).map((x,n)=>'<article class="case" data-i="'+DATA.indexOf(x)+'"><div class="caseDate">'+esc(x.date||x.year||"—")+'</div><div><h3>'+esc(x.title||"Unbenannter Vorgang")+'</h3><p>'+esc(x.summary||x.description||"Dokumentierter Vorgang.")+'</p></div><div class="caseState">'+esc(x.status||x.category||"Dokumentiert")+'</div></article>').join("")||'<div class="note">Keine Treffer.</div>';
 document.querySelectorAll(".case").forEach(el=>el.onclick=()=>openDetail(DATA[+el.dataset.i]));
+}
+function eventPerson(x){return x.name||x.person||x.personId||x.people||"Unbekannt"} 
+function eventType(x){const c=String(x.category||"").toLowerCase(),t=String(x.type||"").toLowerCase(),s=String(x.status||"").toLowerCase();if(/korrekt|rücknahme|ruecknahme|entschuldig/.test(c+" "+t+" "+s))return "Korrektur";if(/abstimm|vote|namentlich/.test(c+" "+t+" "+s))return "Abstimmung";if(/entscheidung|urteil|beschluss|entscheid/.test(c+" "+t+" "+s))return "Entscheidung";if(/ermitt|verfahren|untersuch|gericht/.test(c+" "+t+" "+s))return "Verfahren";if(/position|positionsänder|positionsaender|widerspruch/.test(c+" "+t+" "+s))return "Positionsänderung";return "Aussage"}
+function politicianEvents(){
+ let out=[];
+ STATEMENTS.forEach(x=>out.push({...x,_eventType:eventType({...x,category:"Aussage"}),_person:eventPerson(x),_date:x.date||x.eventDate||x.year||""}));
+ CONDUCT.forEach(x=>out.push({...x,_eventType:eventType(x),_person:eventPerson(x),_date:x.date||x.eventDate||x.year||""}));
+ DATA.forEach(x=>{if(x.people)String(x.people).split(",").map(v=>v.trim()).filter(Boolean).forEach(p=>out.push({...x,name:p,_eventType:eventType(x),_person:p,_date:x.date||x.eventDate||x.year||""}))});
+ return out;
+}
+function renderFinance(){
+ const s=FINANCE.state2025||{},d=FINANCE.debt2025||{},e=FINANCE.eu2025||{};
+ const per=d.perCapitaEuro?Math.round(d.perCapitaEuro).toLocaleString("de-DE")+" €":"—";
+ const cards=[
+  ["2.081 Mrd. €","Staatliche Einnahmen 2025"],
+  ["2.208 Mrd. €","Staatliche Ausgaben 2025"],
+  ["−127,3 Mrd. €","Finanzierungsdefizit 2025"],
+  [(d.publicDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Öffentliche Schulden"],
+  [per,"öffentliche Schulden pro Kopf"],
+  [(d.bundDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden des Bundes"],
+  [(d.landDebtMrd||0).toLocaleString("de-DE")+" Mrd. €","Schulden der Länder"],
+  [(e.debtRatioPct||0).toLocaleString("de-DE")+" %","Maastricht-Schuldenquote 2025"]
+ ];
+ document.getElementById("financeTop").innerHTML=cards.map(x=>'<div class="money"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join("");
+ document.getElementById("financeNote").textContent="Pro-Kopf-Wert: "+per+". Er ist eine statistische Bezugsgröße und keine individuelle Rechnung oder persönliche Schuld. Nationale Schuldenstatistik und Maastricht-Abgrenzung werden getrennt dargestellt. Quelle: Destatis.";
+}
+function renderPoliticianChronicle(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ let ev=politicianEvents().filter(x=>(!q||txt(x).includes(q))&&(!activeEventType||x._eventType===activeEventType)&&(!activePerson||x._person===activePerson));
+ ev.sort((a,b)=>String(b._date).localeCompare(String(a._date)));
+ const people=[...new Set(politicianEvents().map(x=>x._person).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"de"));
+ document.getElementById("eventPeople").innerHTML='<button class="chip '+(!activePerson?"active":"")+'" data-person="">Alle Personen</button>'+people.map(p=>'<button class="chip '+(activePerson===p?"active":"")+'" data-person="'+esc(p)+'">'+esc(p)+'</button>').join("");
+ document.querySelectorAll("#eventPeople .chip").forEach(b=>b.onclick=()=>{activePerson=b.dataset.person;renderPoliticianChronicle()});
+ const counts=new Map();ev.forEach(x=>counts.set(x._person,(counts.get(x._person)||0)+1));
+ document.getElementById("eventList").innerHTML=ev.slice(0,100).map(x=>{
+   const label=x._eventType, body=x.quote||x.statement||x.title||x.description||x.summary||"Dokumentiertes Ereignis";
+   const source=x.source||x.url||x.factCheck?.url||"";
+   return '<article class="case" data-event="'+esc(x.id||"")+'"><div class="caseDate">'+esc(x._date||"—")+'</div><div><h3>'+esc(x._person)+' · '+esc(label)+'</h3><p>'+esc(body)+'</p></div><div class="caseState"><span class="tag">'+esc(label)+'</span>'+(source?'<br>↗':'')+'</div></article>';
+ }).join("")||'<div class="note">Keine Ereignisse für die aktuelle Auswahl.</div>';
+ document.querySelectorAll("#eventList .case").forEach(el=>el.onclick=()=>{const id=el.dataset.event;const x=politicianEvents().find(v=>String(v.id||"")===id);if(x)openEventDetail(x)});
+}
+function openEventDetail(x){
+ const source=x.source||x.url||x.factCheck?.url||"";
+ const later=politicianEvents().filter(e=>e._person===x._person&&String(e._date)>String(x._date)).sort((a,b)=>String(a._date).localeCompare(String(b._date))).slice(0,4);
+ document.getElementById("detail").innerHTML='<div class="eyebrow">'+esc(x._eventType)+' · '+esc(x._date||"")+'</div><h2>'+esc(x._person)+'</h2><div class="meta">'+esc(x.party||"")+" · "+esc(x.title||x.statement||"Dokumentiertes Ereignis")+'</div><div class="detailGrid"><div class="detailCard"><b>Ereignis</b><span>'+esc(x.quote||x.statement||x.description||x.summary||x.title||"—")+'</span></div><div class="detailCard"><b>Typ</b><span>'+esc(x._eventType)+'</span></div><div class="detailCard"><b>Status</b><span>'+esc(x.status||x.result||"Dokumentiert")+'</span></div><div class="detailCard"><b>Spätere dokumentierte Ereignisse</b><span>'+esc(later.length?later.map(e=>e._date+" · "+e._eventType).join(" · "):"Keine verknüpften späteren Ereignisse")+'</span></div></div>'+(source?'<div class="sectionLabel">Quelle</div><div class="evidence"><a href="'+esc(source)+'" target="_blank" rel="noopener">'+esc(x.sourceName||x.publisher||source)+' ↗</a></div>':'<div class="note">Für dieses Ereignis ist derzeit keine Quelle hinterlegt.</div>');document.getElementById("drawer").classList.add("open");
 }
 function renderStatements(){
 let q=document.getElementById("search").value.toLowerCase().trim(),a=[...STATEMENTS,...CONDUCT].filter(x=>!q||txt(x).includes(q)).slice(0,60);
@@ -114,7 +161,7 @@ document.getElementById("detail").innerHTML=
 '<div class="detailCard"><b>Rechtlicher Stand</b><span>'+esc(x.legalStatus||x.proceedingStatus||"Nicht separat angegeben")+'</span></div></div>'+
 (x.costDisplay?'<div class="source"><b>Kosten</b><br>'+esc(x.costDisplay)+'<br><span class="meta">'+esc(x.costType||"")+'</span></div>':'')+
 '<div class="sectionLabel">Timeline</div><div class="timeline">'+timeline+'</div>'+
-'<div class="sectionLabel">Aussagen & Widersprüche</div><div class="detailGrid">'+statementHtml+'</div>'+
+'<div class="sectionLabel">Verknüpfte Aussagen</div><div class="detailGrid">'+statementHtml+'</div>'+
 '<div class="sectionLabel">Quellen & Belege</div><div class="evidence">'+sourceHtml+'</div>';
 document.getElementById("drawer").classList.add("open")}
 document.getElementById("close").onclick=()=>document.getElementById("drawer").classList.remove("open");document.getElementById("drawer").onclick=e=>{if(e.target.id==="drawer")e.currentTarget.classList.remove("open")};init();
