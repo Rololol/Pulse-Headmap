@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-25",
+  "description": "Dokumentierte Verhaltensereignisse. PULSE vergibt keine Glaubwürdigkeitsnote und bezeichnet eine Person nicht pauschal als unglaubwürdig. Stattdessen werden Ereignis, Quelle, Reaktion und ggf. Widersprüche getrennt dokumentiert.",
+  "categories": [
+    "Äußerung",
+    "Widerspruch",
+    "Rücknahme/Korrektur",
+    "Verhaltensregel",
+    "Nebentätigkeit/Interessen",
+    "Interessenkonflikt",
+    "Parlamentarisches Verhalten",
+    "Amtliches Fehlverhalten",
+    "Gerichtliche Feststellung",
+    "Ermittlung/Untersuchung",
+    "Sonstiges"
+  ],
+  "items": []
+}
