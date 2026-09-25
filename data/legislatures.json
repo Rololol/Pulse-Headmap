@@ -1,0 +1,12 @@
+[
+{"id":12,"label":"12. Wahlperiode","start":"1990-12-20","end":"1994-11-10"},
+{"id":13,"label":"13. Wahlperiode","start":"1994-11-10","end":"1998-10-26"},
+{"id":14,"label":"14. Wahlperiode","start":"1998-10-26","end":"2002-10-17"},
+{"id":15,"label":"15. Wahlperiode","start":"2002-10-17","end":"2005-10-18"},
+{"id":16,"label":"16. Wahlperiode","start":"2005-10-18","end":"2009-10-27"},
+{"id":17,"label":"17. Wahlperiode","start":"2009-10-27","end":"2013-10-22"},
+{"id":18,"label":"18. Wahlperiode","start":"2013-10-22","end":"2017-10-24"},
+{"id":19,"label":"19. Wahlperiode","start":"2017-10-24","end":"2021-10-26"},
+{"id":20,"label":"20. Wahlperiode","start":"2021-10-26","end":"2025-03-25"},
+{"id":21,"label":"21. Wahlperiode","start":"2025-03-25","end":null}
+]
