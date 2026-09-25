@@ -10,6 +10,9 @@ PULSE trennt Quellenentdeckung von redaktioneller Bewertung.
 4. Dokumente / Aktenzeichen – Primärquellen und gerichtliche bzw. parlamentarische Referenzen.
 5. Kosten – getrennte Typen für angefallene Kosten, Zahlungsverpflichtungen, geplante/potenzielle Ausgaben und Steuerverzichte.
 6. Geografie – Bundesland, Kreis und Koordinaten; für die Deutschlandkarte wird BKG VG250 verwendet.
+7. Rollen & Gremien – zeitbezogene Ämter, Ausschussmitgliedschaften, Vorsitz, Obleute und weitere parlamentarische Funktionen in data/roles.json.
+8. Verhalten & Aussagen – dokumentierte Äußerungen, Widersprüche, Korrekturen, Verhaltensregeln, Nebentätigkeiten, Interessenkonflikte und amtliche Feststellungen in data/conduct.json und data/statements.json.
+9. Analysen – nachvollziehbare Auswertungen aus den dokumentierten Daten. Keine Glaubwürdigkeitsnoten, keine pauschalen Etiketten und keine politische Rangliste.
 
 ## Redaktionsregel
 
@@ -33,3 +36,27 @@ Die Datenbank ist auf mehrere tausend Vorgänge ausgelegt. data.json bleibt zun�
 ## Karte
 
 Die Verwaltungsgebiete VG250 des BKG stehen als Open Data sowie über WMS/WFS zur Verfügung und werden jährlich fortgeführt.
+
+
+## Personen- und Verhaltensdaten
+
+PULSE soll neben finanziellen Vorgängen auch politische Personen als zeitbezogene Profile abbilden. Dazu gehören:
+
+- Mandate und Ämter
+- Ausschüsse und weitere Gremien
+- Vorsitz und stellvertretender Vorsitz
+- Obleute und Sprecherfunktionen
+- Regierungsämter und frühere Funktionen
+- Nebentätigkeiten und veröffentlichte Einkünfte, soweit amtlich dokumentiert
+- dokumentierte Aussagen mit Datum und Kontext
+- nachprüfbare Widersprüche zwischen Aussagen oder zwischen Aussage und späterem dokumentiertem Handeln
+- Rücknahmen, Korrekturen und Richtigstellungen
+- Verstöße gegen gesetzliche oder parlamentarische Verhaltensregeln, soweit amtlich festgestellt
+- Interessenkonflikte und veröffentlichte Interessenverknüpfungen
+- parlamentarisches Verhalten, z. B. namentliche Abstimmungen, wenn der konkrete Vorgang relevant ist
+
+### Grundsatz zur „Glaubwürdigkeit“
+
+PULSE berechnet keine persönliche Glaubwürdigkeitsnote. Stattdessen werden die Tatsachen dokumentiert, aus denen Nutzer selbst eine Einschätzung ableiten können. Ein Eintrag muss zwischen **Aussage**, **Gegenbeleg/Widerspruch**, **Reaktion** und **Quelle** unterscheiden. Medien- oder politische Bewertungen werden als solche gekennzeichnet und nicht als objektive Tatsache übernommen.
+
+Die Bundestagsverwaltung veröffentlicht Angaben zu Nebentätigkeiten und Interessenverknüpfungen nach den geltenden Verhaltensregeln. Der Bundestag stellt außerdem Plenarprotokolle, Drucksachen und Abgeordneten-Stammdaten maschinenlesbar bereit. Diese Quellen bilden die Grundlage für die spätere Automatisierung. 
