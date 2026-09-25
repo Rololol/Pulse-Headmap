@@ -96,3 +96,22 @@ button,input{font:inherit}
   .map-wrap{height:56vh;min-height:370px}
   .chip{font-size:8px;padding:7px 9px}
 }
+
+@media(max-width:720px){
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  .app{min-height:100svh}
+  .layout{min-height:calc(100svh - 58px)}
+  .map-wrap{height:60svh;min-height:390px;max-height:none}
+  .map{height:100%;min-height:0}
+  .timeline{bottom:10px;left:8px;right:8px;border-radius:3px}
+  .sidebar{position:relative;z-index:15;background:var(--panel);box-shadow:0 -8px 20px #0008}
+  .details{background:var(--panel2)}
+  .leaflet-container{touch-action:pan-x pan-y}
+  .leaflet-control-attribution{font-size:8px}
+  .leaflet-popup-content-wrapper{max-width:calc(100vw - 70px)}
+}
+@media(orientation:landscape) and (max-width:900px){
+  .map-wrap{height:calc(100svh - 58px);min-height:320px}
+  .sidebar{display:none}
+  .details{max-height:45svh;overflow:auto}
+}
