@@ -1,1 +1,77 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>POLITIK RPG · Transparenz-Datenbank</title><meta name="description" content="Quellenbasierte Übersicht zu Lobbyismus, Interessenkonflikten, Ermittlungen und rechtskräftigen Entscheidungen deutscher Politiker."><link rel="stylesheet" href="style.css"></head><body><header><div class="brand"><span class="pixel-dot"></span>POLITIK RPG <span class="muted">/</span> TRANSPARENZ</div><nav><a href="#faelle">Fälle</a><a href="#methodik">Methodik</a><a href="#quellen">Quellen</a></nav></header><main><section class="hero"><div class="eyebrow">DEUTSCHLAND · QUELLENBASIERT</div><h1>POLITIKER<br><span>IM PIXEL-CHECK</span></h1><p>Eine quellenbasierte Datenbank zu Lobbyismus, Interessenkonflikten, Parteispenden, Ermittlungen, Verfahren und staatlichen Kosten. Jeder Eintrag zeigt Status, Quelle und Kontext.</p><div id="stats" class="stats"></div></section><div class="pixel-note">★ REGEL: Vorwurf ≠ Schuld · Ermittlung ≠ Verurteilung · Kosten ≠ persönliche Haftung</div><section id="faelle" class="controls"><input id="search" type="search" placeholder="Politiker, Unternehmen, Thema …"><select id="category"><option value="">Alle Kategorien</option><option>Lobbyismus</option><option>Interessenkonflikt</option><option>Ermittlung</option><option>Verurteilung</option><option>Staatliche Kosten</option><option>Parteispenden</option></select><select id="status"><option value="">Alle Status</option><option>Dokumentiert</option><option>Vorwurf</option><option>Ermittlung</option><option>Verurteilt</option></select></section><div class="legend"><span><i class="blue"></i> dokumentiert</span><span><i class="amber"></i> Vorwurf / Streitfrage</span><span><i class="red"></i> strafrechtliches Verfahren</span><span><i class="green"></i> rechtskräftig verurteilt</span></div><section id="cards" class="cards"></section><section id="methodik" class="method"><div><div class="eyebrow">METHODIK</div><h2>SPIELREGELN FÜR DIE DATENBANK</h2></div><div class="method-grid"><p><b>1. Status statt Schuldbehauptung</b><br>„Vorwurf“, „Ermittlung“ und „Verurteilung“ bleiben getrennte Zustände. Eine Lobbybeziehung ist nicht automatisch eine Straftat.</p><p><b>2. Primärquellen zuerst</b><br>Bundestag, Lobbyregister, Gerichte und Behörden werden gegenüber Medienberichten priorisiert.</p><p><b>3. Jeder Datensatz ist prüfbar</b><br>Jeder Vorgang enthält Datum, Beteiligte, Kurzbeschreibung und Quelle.</p><p><b>4. Keine Punkte für Schuld</b><br>Die Anwendung vergibt keinen „Korruptionsscore“ und erstellt keine politische Rangliste.</p></div></section><section id="quellen" class="sources"><div class="eyebrow">QUELLEN</div><h2>Recherche-Basis</h2><div class="source-list"><a href="https://www.lobbyregister.bundestag.de/suche-im-lobbyregister" target="_blank">Bundestag · Lobbyregister ↗</a><a href="https://www.bundestag.de/" target="_blank">Deutscher Bundestag ↗</a><a href="https://www.abgeordnetenwatch.de/" target="_blank">abgeordnetenwatch.de ↗</a><a href="https://www.tagesschau.de/" target="_blank">tagesschau.de ↗</a></div></section></main><footer>POLITIK RPG · QUELLENBASIERT · Keine Rechtsberatung · Datenmodell v2</footer><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Politik Transparenz · Quellenbasierte Datenbank</title>
+<meta name="description" content="Quellenbasierte Übersicht zu Lobbyismus, Interessenkonflikten, Ermittlungen, Verurteilungen, Parteispenden und staatlichen Kosten.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="shell nav-wrap">
+    <a class="brand" href="#">POLITIK<span>TRANSPARENZ</span></a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#faelle">Fälle</a><a href="#methodik">Methodik</a><a href="#quellen">Quellen</a>
+    </nav>
+    <a class="nav-cta" href="#faelle">Datenbank öffnen</a>
+  </div>
+</header>
+
+<main>
+<section class="hero shell">
+  <div class="hero-copy">
+    <div class="eyebrow">DEUTSCHLAND · QUELLENBASIERT</div>
+    <h1>Politische Vorgänge<br><span>nachvollziehbar dokumentiert.</span></h1>
+    <p>Eine strukturierte Übersicht zu Lobbyismus, Interessenkonflikten, Parteispenden, Ermittlungen, Verurteilungen und staatlichen Kosten. Jeder Datensatz ist mit Quelle und Status versehen.</p>
+    <div class="hero-actions"><a class="button primary" href="#faelle">Fälle durchsuchen</a><a class="button secondary" href="#methodik">Methodik ansehen</a></div>
+  </div>
+  <div class="hero-panel">
+    <div class="panel-label">DATENBANK · LIVE FILTER</div>
+    <div id="stats" class="stats"></div>
+    <div class="status-strip"><span class="status-dot blue"></span> Dokumentiert <span class="status-dot amber"></span> Vorwurf <span class="status-dot red"></span> Verfahren <span class="status-dot green"></span> Verurteilt</div>
+  </div>
+</section>
+
+<section id="faelle" class="database shell">
+  <div class="section-head">
+    <div><div class="eyebrow">DATENBANK</div><h2>Fälle & Vorgänge</h2></div>
+    <span id="result-count" class="result-count"></span>
+  </div>
+  <div class="filters">
+    <label class="searchbox"><span>⌕</span><input id="search" type="search" placeholder="Name, Unternehmen, Thema …" autocomplete="off"></label>
+    <select id="category" aria-label="Kategorie">
+      <option value="">Alle Kategorien</option><option>Lobbyismus</option><option>Interessenkonflikt</option><option>Ermittlung</option><option>Verurteilung</option><option>Staatliche Kosten</option><option>Parteispenden</option>
+    </select>
+    <select id="status" aria-label="Status">
+      <option value="">Alle Status</option><option>Dokumentiert</option><option>Vorwurf</option><option>Ermittlung</option><option>Verurteilt</option>
+    </select>
+  </div>
+  <div class="filter-note">Hinweis: Vorwurf ≠ Schuld · Ermittlung ≠ Verurteilung · staatliche Kosten ≠ persönliche Haftung.</div>
+  <section id="cards" class="cards" aria-live="polite"></section>
+</section>
+
+<section id="methodik" class="info-section shell">
+  <div class="section-head"><div><div class="eyebrow">METHODIK</div><h2>So werden Einträge eingeordnet</h2></div></div>
+  <div class="method-grid">
+    <article><span>01</span><h3>Status statt Schuldbehauptung</h3><p>„Vorwurf“, „Ermittlung“ und „Verurteilung“ bleiben getrennte Zustände. Eine Lobbybeziehung ist nicht automatisch eine Straftat.</p></article>
+    <article><span>02</span><h3>Primärquellen zuerst</h3><p>Bundestag, Lobbyregister, Gerichte und Behörden werden gegenüber Medienberichten priorisiert.</p></article>
+    <article><span>03</span><h3>Jeder Datensatz prüfbar</h3><p>Vorgänge enthalten Beteiligte, Zeitraum, Kurzbeschreibung und einen direkten Quellenlink.</p></article>
+    <article><span>04</span><h3>Keine politische Rangliste</h3><p>Die Anwendung vergibt keinen „Korruptionsscore“ und bewertet oder ordnet Politiker nicht nach politischer Präferenz.</p></article>
+  </div>
+</section>
+
+<section id="quellen" class="sources shell">
+  <div class="source-copy"><div class="eyebrow">QUELLEN</div><h2>Recherche-Basis</h2><p>Die Datenbank verlinkt auf öffentlich zugängliche Primär- und etablierte Sekundärquellen. Quellen können direkt geöffnet und geprüft werden.</p></div>
+  <div class="source-list">
+    <a href="https://www.lobbyregister.bundestag.de/suche-im-lobbyregister" target="_blank" rel="noreferrer"><strong>Bundestag</strong><span>Lobbyregister ↗</span></a>
+    <a href="https://www.bundestag.de/" target="_blank" rel="noreferrer"><strong>Deutscher Bundestag</strong><span>Dokumente & Ausschüsse ↗</span></a>
+    <a href="https://www.abgeordnetenwatch.de/" target="_blank" rel="noreferrer"><strong>abgeordnetenwatch.de</strong><span>Recherchen & Transparenz ↗</span></a>
+    <a href="https://www.tagesschau.de/" target="_blank" rel="noreferrer"><strong>tagesschau</strong><span>Recherche & Einordnung ↗</span></a>
+  </div>
+</section>
+</main>
+<footer><div class="shell footer-inner"><span>POLITIK TRANSPARENZ</span><span>Quellenbasiert · Keine Rechtsberatung · Datenmodell v2</span></div></footer>
+<script src="app.js"></script>
+</body>
+</html>
