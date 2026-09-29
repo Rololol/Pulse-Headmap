@@ -4,7 +4,7 @@ function setTheme(theme){root.dataset.theme=theme;const dark=theme==="dark";them
 function initTheme(){let t=null;try{t=localStorage.getItem("theme")}catch(e){};setTheme(t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))}
 themeToggle.addEventListener("click",()=>setTheme(root.dataset.theme==="dark"?"light":"dark"));
 const sort=document.querySelector("#sort");
-function yearValue(v){const m=String(v).match(/(19|20)\\d{2}/);return m?Number(m[0]):0}
+function yearValue(v){const m=String(v).match(/(19|20)\d{2}/);return m?Number(m[0]):0}
 function render(){
  const q=document.querySelector("#search").value.toLowerCase(),c=document.querySelector("#category").value,s=document.querySelector("#status").value;
  let rows=cases.filter(x=>(!q||JSON.stringify(x).toLowerCase().includes(q))&&(!c||x.category===c)&&(!s||x.status===s));
