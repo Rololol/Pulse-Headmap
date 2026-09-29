@@ -7,18 +7,18 @@
 <meta name="description" content="Quellenbasierte Übersicht zu Lobbyismus, Interessenkonflikten, Ermittlungen, Verurteilungen, Parteispenden und staatlichen Kosten.">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body><a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header">
   <div class="shell nav-wrap">
     <a class="brand" href="#">POLITIK<span>TRANSPARENZ</span></a>
     <nav class="nav-links" aria-label="Hauptnavigation">
       <a href="#faelle">Fälle</a><a href="#methodik">Methodik</a><a href="#quellen">Quellen</a>
     </nav>
-    <a class="nav-cta" href="#faelle">Datenbank öffnen</a>
+    <div class="header-actions"><button id="theme-toggle" class="icon-button" type="button" aria-pressed="false" aria-label="Dunkelmodus aktivieren">◐ <span>Dunkel</span></button><details class="mobile-menu"><summary aria-label="Menü öffnen">☰</summary><div class="mobile-panel"><a href="#faelle">Fälle</a><a href="#methodik">Methodik</a><a href="#quellen">Quellen</a><a href="#faelle">Datenbank öffnen</a></div></details><a class="nav-cta" href="#faelle">Datenbank öffnen</a></div>
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="hero shell">
   <div class="hero-copy">
     <div class="eyebrow">DEUTSCHLAND · QUELLENBASIERT</div>
@@ -43,12 +43,12 @@
     <select id="category" aria-label="Kategorie">
       <option value="">Alle Kategorien</option><option>Lobbyismus</option><option>Interessenkonflikt</option><option>Ermittlung</option><option>Verurteilung</option><option>Staatliche Kosten</option><option>Parteispenden</option>
     </select>
-    <select id="status" aria-label="Status">
+    <select id="sort" aria-label="Sortierung"><option value="new">Neueste zuerst</option><option value="old">Älteste zuerst</option><option value="name">Name A–Z</option></select><button id="reset" class="reset-button" type="button">Zurücksetzen</button><select id="status" aria-label="Status">
       <option value="">Alle Status</option><option>Dokumentiert</option><option>Vorwurf</option><option>Ermittlung</option><option>Verurteilt</option>
     </select>
   </div>
   <div class="filter-note">Hinweis: Vorwurf ≠ Schuld · Ermittlung ≠ Verurteilung · staatliche Kosten ≠ persönliche Haftung.</div>
-  <section id="cards" class="cards" aria-live="polite"></section>
+  <section id="cards" class="cards" aria-live="polite" aria-label="Datensätze"></section>
 </section>
 
 <section id="methodik" class="info-section shell">
